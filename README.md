@@ -1,2 +1,3 @@
-# Journal app
+# Eloper
+## Dev.to Clone
 
