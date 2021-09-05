@@ -47,17 +47,36 @@ router.post("/", [
     bcrypt.compare(password, user.password, (err, isValid) => {
       if(!isValid) return res.status(400).json({ msg: "Wrong email or password" });
 
+      // Save user to session store
+      const sessUser = { name: user.name, uid: user.uid };
+      req.session.user = sessUser;
+
       res.json({
-        user: {
-          name: user.name,
-          uid: user.uid
-        }
-      })
+        sessUser
+      });
 
     })
   })
   
   
 })
+
+/**
+ * @route  GET api/auth
+ * @desc   Check if logged in & return cookie
+ * @access Public
+*/
+router.get("/", (req, res) => {
+  const sessUser = req.session.user;
+
+  if(!sessUser) {
+    return res.status(401).json({ msg: "Unauthorized" });
+  } else {
+    return res.json(sessUser);
+  }
+})
+
+
+
 
 module.exports = router;

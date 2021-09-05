@@ -78,6 +78,10 @@ router.post("/", [
         return res.status(400).json({ msg: "Something went wrong" });
       }
 
+      // Save to session storage
+      const sessUser = { name: newUser.name, uid: newUser.uid }
+      req.session.user = sessUser;
+
       res.json({
         newUser
       })
@@ -86,5 +90,20 @@ router.post("/", [
   })
 
 })
+
+/**
+ * @route  DELETE api/users
+ * @desc   Logout user
+ * @access Public
+*/
+router.delete("/", (req, res) => {
+  req.session.destroy((err) => {
+    if(err) throw err;
+    res.clearCookie("sid");
+    res.send({ msg: "Logged out successfully" });
+  })
+  
+})
+
 
 module.exports = router;
