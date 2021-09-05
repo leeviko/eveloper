@@ -13,12 +13,14 @@ const Navbar = () => {
         <div className="nav-brand">Eveloper</div>
         <Search />
         <div className="nav-items">
-          <Link to="/create-new" className="nav-item create-new-btn btn">Create a Post</Link>
+          <Link className="nav-item btn-outline" to="/login">Login</Link>
+          <Link className="nav-item btn" to="/register">Register</Link>
+          {/* <Link to="/create-new" className="nav-item create-new-btn btn">Create a Post</Link>
           <button className="nav-item-btn nav-item"><img alt="" src={AlertImg} /></button>
           <Link className="nav-item profile-link" to="/profile" >
             <img alt="" src={AccountImg} />
             <span>Username</span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>
