@@ -1,6 +1,93 @@
+:root {
+  --white: #F3F8FF;
+  --white-filter: invert(88%) sepia(2%) saturate(3279%) hue-rotate(197deg) brightness(111%) contrast(101%);
+
+  --accent: #33A6FB;
+  --accent-transparent: hsla(206, 96%, 59%, 0.15);
+
+  --dark-blue: #082032;
+  --blue: #0C2F49;
+
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--dark-blue);
+}
+
+.btn {
+  background-color: var(--accent);
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.nav {
+
+  padding: 5px 300px;
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.search-form {
+  margin: 0 10px;
+}
+
+.search {
+  font-family: inherit;
+  border: 1px solid var(--accent);
+  background-color: var(--accent-transparent);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.nav-items {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-item {
+  margin: 0 5px;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.profile-link > img,
+.profile-link > span {
+  vertical-align: middle;
+}
+
+.nav-item img {
+  vertical-align: middle;
+  background-color: none;
+  filter: var(--white-filter);
+  width: 34px;
+}
+
+.nav-item-btn {
+  background: none;
+}
+
+
+.nav-items * {
+  border: none;
+  background-color: none;
+}
