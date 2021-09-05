@@ -10,6 +10,7 @@ const auth = require("./routes/api/auth");
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({
   name: "sid",
@@ -21,7 +22,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 3,
     sameSite: false,
     secure: false
-  }
+  },
 }));
 app.use(morgan("dev"));
 
