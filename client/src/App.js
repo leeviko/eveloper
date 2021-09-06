@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { isAuth } from "./actions/authActions"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-
+// Components
 import Navbar from "./components/Navbar/Navbar";
 import Spinner from "./components/Spinner";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
+import Logout from "./components/pages/Logout";
 
 const AppContent = () => {
   return (
@@ -25,6 +26,10 @@ const AppContent = () => {
         <Route path="/register">
           <Navbar />
           <Register />
+        </Route>
+        <Route path="/logout">
+          <Navbar />
+          <Logout />
         </Route>
       </Switch>
     </div>

@@ -1,7 +1,10 @@
-import React from 'react'
-import { Link } from "react-router-dom"
+import React from 'react';
+import { Link } from "react-router-dom";
 
 const Dropdown = ({ show }) => {
+
+  
+
   return (  
     <div className={"dropdown " + (show ? "show" : "hide")}>
       <div className="dropdown-menu">
@@ -13,4 +16,4 @@ const Dropdown = ({ show }) => {
   )
 }
 
-export default Dropdown
+export default Dropdown;

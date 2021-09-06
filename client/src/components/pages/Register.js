@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../actions/authActions"; 
-import { clearErrors } from "../actions/errorActions"; 
+import { register } from "../../actions/authActions"; 
+import { clearErrors } from "../../actions/errorActions"; 
 import { Link, Redirect } from "react-router-dom";
 
-import useForm from "../hooks/useForm";
+import useForm from "../../hooks/useForm";
 
 const Login = () => {
   const [values, handleChange] = useForm({  email: "", name: "", password: "", confirmPassword: "" })

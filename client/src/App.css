@@ -154,6 +154,7 @@ body {
 }
 
 .nav-item {
+  margin: 0 5px;
   font-family: inherit;
   transition: 0.15s;
   cursor: pointer;
@@ -191,7 +192,6 @@ body {
 }
 
 .alert-link, .profile-link {
-  margin: 0 5px;
   font-size: 1rem;
   padding: 2px;
   border-radius: 5px;

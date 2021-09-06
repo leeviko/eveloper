@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { login } from "../actions/authActions";
-import { clearErrors } from "../actions/errorActions";
+import { login } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
 import { Redirect } from "react-router-dom";
 
-import useForm from "../hooks/useForm";
+import useForm from "../../hooks/useForm";
 
 const Login = () => {
   const dispatch = useDispatch();

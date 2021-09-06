@@ -87,7 +87,7 @@ export const register = ({ email, name, password }) => dispatch => {
 // Logout
 export const logout = () => dispatch => {
   
-  axios.delete("/api/auth", { withCredentials: true })
+  axios.delete("/api/users", { withCredentials: true })
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS
