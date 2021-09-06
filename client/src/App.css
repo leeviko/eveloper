@@ -9,6 +9,7 @@
   --dark-blue: #082032;
   --light-blue: #0e3757;
   --blue: #0C2F49;
+  --blue-transp: hsla(206, 96%, 59%, 0.15);
 
   --danger: #fb3333;
   --danger-transp: #fb333310;
@@ -156,7 +157,6 @@ body {
   font-family: inherit;
   transition: 0.15s;
   cursor: pointer;
-  margin: 0 5px;
   text-decoration: none;
   color: var(--white);
 }
@@ -191,13 +191,14 @@ body {
 }
 
 .alert-link, .profile-link {
+  margin: 0 5px;
   font-size: 1rem;
   padding: 2px;
   border-radius: 5px;
 }
 
 .alert-link:hover, .profile-link:hover {
-  background-color: hsla(206, 96%, 59%, 0.15);
+  background-color: var(--blue-transp);
 
 }
 
@@ -217,6 +218,7 @@ body {
 }
 
 .dropdown {
+  border: 2px solid var(--accent);
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: left;
@@ -225,7 +227,6 @@ body {
   border-radius: 5px;
   top: 46px;
   cursor: default;
-  left: 70%;
   background-color: var(--light-blue);
   width: 200px;
   height: 250px;
@@ -235,12 +236,19 @@ body {
 .dropdown-menu {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .dropdown-link {
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
   font-family: 'Poppins', sans-serif;
   text-align: left;
-  margin: 5px;
+}
+
+.dropdown-link:hover {
+  background-color: var(--blue-transp);
 }
 
 .title {
