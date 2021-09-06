@@ -26,6 +26,12 @@ body {
   background-color: var(--dark-blue);
 }
 
+.cover {
+  width: 100vh;
+  height: 100vh;
+  background-color: var(--dark-blue);
+}
+
 .spinner {
   position: absolute;
   top: calc(50% - 4em);
@@ -37,10 +43,6 @@ body {
   border-radius: 50%;
   animation: load8 1.1s infinite linear;
   transition: opacity 0.3s;
-}
-
-.loader--hide {
-  opacity: 0;
 }
 
 /* .hide {
@@ -70,6 +72,7 @@ body {
 }
 
 .btn {
+  white-space: nowrap;
   border: none;
   background-color: var(--accent);
   padding: 5px 15px;
@@ -78,6 +81,7 @@ body {
 }
 
 .btn-outline {
+  white-space: nowrap;
   padding: 3px 15px;
   border: 2px solid var(--accent);
   border-radius: 5px;
@@ -94,7 +98,6 @@ body {
   border: 2px solid var(--accent-hover);
 
 }
-
 
 .nav {
   padding: 5px 300px;
@@ -133,9 +136,15 @@ body {
 }
 
 .nav-item {
+  cursor: pointer;
   margin: 0 5px;
   text-decoration: none;
   color: var(--white);
+}
+
+.profile-link {
+  white-space: nowrap;
+
 }
 
 .profile-link > img,
