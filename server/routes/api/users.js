@@ -17,7 +17,7 @@ router.post("/", [
     .trim()
     .escape()
     .isLength({ min: 4 })
-    .withMessage("Must be at least 4 letters long."),
+    .withMessage("Name must be at least 4 letters long."),
   check("email")
     .trim()
     .escape()
@@ -32,17 +32,17 @@ router.post("/", [
   // Check for errors during validation
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ msg: errors.array() });
+    return res.status(400).json(errors.array());
   }
 
   const { name, email, password } = req.body;
-  const id = uuidv4();
+  const uid = uuidv4();
 
   const newUser = {
     name,
     email,
     password,
-    id
+    uid
   }
 
   // Check if user already exists
@@ -50,10 +50,10 @@ router.post("/", [
 
   pool.query(sql, [newUser.email], (err, result) => {
     if(err) {
-      return  res.status(400).json({ msg: "Something went wrong" });
+      return res.status(400).json([{ msg: "Something went wrong" }]);
     }
     if(result.rowCount == 1) {
-      return res.status(400).json({ msg: "Email is already on use" });
+      return res.status(400).json([{ msg: "Email is already on use" }]);
     }
 
   })
@@ -61,7 +61,7 @@ router.post("/", [
   // Hash password
   bcrypt.hash(password, 10, (err, hash) => {
     if(err) {
-      return res.status(400).json({ msg: "Something went wrong" });
+      return res.status(400).json([{ msg: "Something went wrong" }]);
     }
 
     newUser.password = hash
@@ -70,12 +70,12 @@ router.post("/", [
     const query = {
       name: "create-user",
       text: "INSERT INTO users VALUES ($1, $2, $3, $4)",
-      values: [newUser.id, newUser.email, newUser.password, newUser.name],
+      values: [newUser.uid, newUser.email, newUser.password, newUser.name],
     }
 
     pool.query(query, (err, result) => {
       if(err) {
-        return res.status(400).json({ msg: "Something went wrong" });
+        return res.status(400).json([{ msg: "Something went wrong" }]);
       }
 
       // Save to session storage
@@ -83,7 +83,7 @@ router.post("/", [
       req.session.user = sessUser;
 
       res.json({
-        newUser
+        sessUser
       })
     })
 
@@ -100,7 +100,7 @@ router.delete("/", (req, res) => {
   req.session.destroy((err) => {
     if(err) throw err;
     res.clearCookie("sid");
-    res.send({ msg: "Logged out successfully" });
+    res.send([{ msg: "Logged out successfully" }]);
   })
   
 })

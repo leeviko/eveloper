@@ -27,8 +27,8 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        ...action.payload,
         isAuthenticated: true,
+        user: action.payload.sessUser,
         isLoading: false
       }
     case AUTH_ERROR:

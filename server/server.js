@@ -1,7 +1,7 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
-const session = require("express-session");
-const SQLiteStore = require("connect-sqlite3")(session);
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 const sessionStore = new SQLiteStore({ db: "sessions.sqlite" });
 const morgan = require("morgan");
 
@@ -10,13 +10,12 @@ const auth = require("./routes/api/auth");
 
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({
   name: "sid",
   store: sessionStore,
   secret: process.env.SESS_SECRET,
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   cookie: {
     maxAge: 1000 * 60 * 60 * 3,
