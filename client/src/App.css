@@ -67,9 +67,25 @@ body {
   padding: 10px 15px;
 }
 
+.errors.hide {
+  display: none;
+}
+
+.errors.show {
+  display: block;
+}
+
 .alert {
   font-size: 0.8rem;
   color: var(--danger);
+}
+
+.alert.hide {
+  display: none;
+}
+
+.alert.show {
+  display: block;
 }
 
 .btn {
@@ -255,9 +271,7 @@ body {
 
 .form-container form input {
   font-family: inherit;
-
   color: var(--white);
-
 }
 
 .form-container form input[type="text"], input[type="password"] {
@@ -265,10 +279,8 @@ body {
   background-color: var(--accent-transparent);
   padding: 5px;
   border-radius:  5px;
-
 }
 
 .form-container form input[type="submit"] {
   margin-top: 10px;
 }
-

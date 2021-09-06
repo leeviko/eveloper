@@ -52,13 +52,15 @@ const Login = () => {
           <input name="email" type="text" value={values.email} onChange={handleChange} />
           <label>Password</label>
           <input name="password" type="password" value={values.password} onChange={handleChange} />
-          <ul className="errors">
-            {
-              errors ? errors.map((error, i) => (
-                <li className="alert" key={i}>{error.msg}</li>
-              )) : null
-            }
-          </ul>
+          {
+            <ul className={"errors " + (errors[0] ? "show" : "hide") }>
+              {
+                errors ? errors.map((error, i) => (
+                  <li className="alert" key={i}>{error.msg}</li>
+                )) : null
+              }
+            </ul>
+          }
 
           <input type="submit" value="Login" className="submit-btn btn" />
         </form>

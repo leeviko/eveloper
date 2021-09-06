@@ -65,13 +65,13 @@ const Login = () => {
           <input name="password" type="password" value={values.password} onChange={handleChange} />
           <label>Confirm password</label>
           <input name="confirmPassword" type="password" value={values.confirmPassword} onChange={handleChange} />
-          <ul className="errors">
+          <ul className={"errors " + (errors[0] ? "show" : "hide") }>
             {
               errors ? errors.map((error, i) => (
                 <li className="alert" key={i}>{error.msg}</li>
               )) : null
-              
             }
+
             {
               msg ? <li className="alert">{msg}</li> : null
             }
