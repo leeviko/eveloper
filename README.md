@@ -1,6 +1,15 @@
 # Eveloper
 #### Dev.to clone (Built for practise purposes)
 (This is still in progress)
+
+## Features
+- [x] Registration and authentication
+- [ ] Create a post
+- [ ] Like post
+- [ ] Favorite post
+- [ ] Search for users and posts
+- [ ] Search for posts by tag or user
+
 ## Getting started
 
 1. First clone the repo:
