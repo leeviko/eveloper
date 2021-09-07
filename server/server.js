@@ -7,6 +7,7 @@ const morgan = require("morgan");
 
 const users = require("./routes/api/users");
 const auth = require("./routes/api/auth");
+const posts = require("./routes/api/posts");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(morgan("dev"));
 
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use("/api/posts", posts);
 
 const port = process.env.PORT || 5000;
 

@@ -92,11 +92,11 @@ router.post("/", [
 })
 
 /**
- * @route  DELETE api/users
+ * @route  DELETE api/users/logout
  * @desc   Logout user
  * @access Public
 */
-router.delete("/", (req, res) => {
+router.delete("/logout", (req, res) => {
   req.session.destroy((err) => {
     if(err) throw err;
     res.clearCookie("sid");

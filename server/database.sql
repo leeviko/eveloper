@@ -12,5 +12,17 @@ CREATE TABLE blogs (
   uid varchar(255) REFERENCES users,
   title varchar(30) NOT NULL,
   content text NOT NULL,
-  tags text[]
+  tags text[],
+);
+
+CREATE TABLE votes_blogs (
+  vote_id varchar(255) NOT NULL PRIMARY KEY,
+  uid varchar(255) REFERENCES users,
+  bid VARCHAR(255) REFERENCES blogs
+);
+
+CREATE TABLE favorited_blogs (
+  favorite_id varchar(255) NOT NULL PRIMARY KEY,
+  uid varchar(255) REFERENCES users,
+  bid VARCHAR(255) REFERENCES blogs
 );
