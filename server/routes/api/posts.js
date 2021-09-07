@@ -39,7 +39,7 @@ router.post("/", [
 
   const query = {
     name: "create-post",
-    text: "INSERT INTO blogs VALUES ($1, $2, $3, $4, $5)",
+    text: "INSERT INTO posts VALUES ($1, $2, $3, $4, $5)",
     values: [newPost.bid, newPost.uid, newPost.title, newPost.content, newPost.tags],
   }
 
@@ -74,7 +74,7 @@ router.get("/:slug/", [
 
   const query = {
     name: "get-post",
-    text: "SELECT * FROM blogs WHERE bid = $1",
+    text: "SELECT * FROM posts WHERE bid = $1",
     values: [bid],
   }
 
