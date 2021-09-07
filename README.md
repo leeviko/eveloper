@@ -8,7 +8,8 @@
 - [ ] Like post
 - [ ] Favorite post
 - [ ] Search for users and posts
-- [ ] Search for posts by tag or user
+- [ ] Search for posts by tag, user or popularity
+- [ ] Follow user
 
 ## Getting started
 
