@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Spinner from "./components/Spinner";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import Profile from "./components/pages/Profile";
 import Logout from "./components/pages/Logout";
 
 const AppContent = () => {
@@ -26,6 +27,10 @@ const AppContent = () => {
         <Route path="/register">
           <Navbar />
           <Register />
+        </Route>
+        <Route path="/profile">
+          <Navbar />
+          <Profile />
         </Route>
         <Route path="/logout">
           <Navbar />

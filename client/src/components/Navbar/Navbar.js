@@ -18,7 +18,7 @@ const LoggedIn = () => {
       <Link to="/create-new" className="nav-item create-new-btn btn">Create a Post</Link>
       <button className="nav-item nav-item-btn alert-link"><img alt="" src={AlertImg} /></button>
       <button
-        className="nav-item nav-item-btn profile-link" 
+        className="nav-item nav-item-btn profile-nav-link" 
         onMouseEnter={() => setShowMenu(true)}
         onMouseLeave={() => setShowMenu(false)}
       >
