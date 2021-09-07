@@ -92,7 +92,13 @@ body {
   display: block;
 }
 
+a {
+  color: var(--white);
+  text-decoration: none;
+}
+
 .btn {
+  font-family: inherit;
   white-space: nowrap;
   border: none;
   background-color: var(--accent);

@@ -46,7 +46,7 @@ const Navbar = () => {
   return (
     <nav className="nav">
       <div className="nav-container">
-        <div className="nav-brand">Eveloper</div>
+        <Link className="nav-brand" to="/">Eveloper</Link>
         <Search />
         <div className={"nav-items " + (isLoading ? "hide" : "")}>
           {
