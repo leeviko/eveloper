@@ -426,6 +426,8 @@ a {
 }
 
 .option-btn {
+  transition: 0.2s;
+  position: relative;
   cursor: pointer;
   color: var(--white);
   font-family: inherit;
@@ -433,6 +435,15 @@ a {
   border: none;
   background: none;
 }
+
+.option-btn.highlight::after {
+  content: " ";
+  display: block;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  border-radius: 2px;
+ }
+ 
 
 .editor-fields {
   font-family: 'Roboto Mono', monospace;
@@ -491,3 +502,4 @@ a {
 .editor-preview {
   color: var(--white);
 }
+

@@ -25,7 +25,6 @@ const CreatePost = () => {
           onSubmit={onSubmit}
           values={values}
           handleChange={handleChange}
-
         /> 
       }
     </Fragment>
