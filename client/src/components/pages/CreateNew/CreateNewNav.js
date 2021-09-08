@@ -2,9 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from "react-router-dom";
 
-import Close from "../images/close.svg";
+import Close from "../../../images/close.svg";
 
-const Navbar = () => {
+const CreateNewNav = () => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isLoading = useSelector(state => state.auth.isLoading);
 
@@ -21,4 +21,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar;
+export default CreateNewNav;

@@ -409,3 +409,82 @@ a {
   border: 1px solid var(--accent);
   background-color: var(--blue-transp2);
 }
+
+
+/* EDITOR */
+.create-post {
+  margin: 15px 300px;
+}
+
+.editor {
+  width: 60%;
+}
+
+.editor-options {
+  display: flex;
+  justify-content: right;
+}
+
+.option-btn {
+  cursor: pointer;
+  color: var(--white);
+  font-family: inherit;
+  margin: 5px;
+  border: none;
+  background: none;
+}
+
+.editor-fields {
+  font-family: 'Roboto Mono', monospace;
+
+}
+
+.post-title {
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+  background-color: var(--blue-transp2);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.post-title input {
+  outline: none;
+  padding: 5px 15px;
+  font-family: inherit;
+  color: var(--white);
+  border: none;
+  background: none;
+}
+
+.post-title .editor-title {
+  font-size: 1.1rem;
+}
+
+.post-content {
+  margin-top: 15px;
+}
+
+.post-content textarea {
+  padding: 15px;
+
+  color: var(--white);
+  overflow-y: auto;
+  background-color: var(--blue-transp2);
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+  width: 100%;
+  resize: none;
+  font-family: inherit;
+  min-height: 65vh;
+}
+
+.post-content textarea::placeholder {
+  color: var(--white);
+}
+
+.editor-btn {
+  font-family: "Poppins", sans-serif;
+  margin-top: 10px;
+
+}

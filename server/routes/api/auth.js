@@ -16,6 +16,7 @@ router.post("/", [
   check("email")
   .isEmail()
   .normalizeEmail()
+  .toLowerCase()
   .withMessage("Invalid syntax"),
   check("password")
   .trim()

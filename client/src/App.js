@@ -6,12 +6,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Components
 import Navbar from "./components/Navbar/Navbar";
-import CreateNewNav from "./components/CreateNewNav";
+import CreateNewNav from "./components/pages/CreateNew/CreateNewNav";
 import Spinner from "./components/Spinner";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
-import CreatePost from "./components/pages/CreatePost";
+import CreatePost from "./components/pages/CreateNew/CreatePost";
 import Logout from "./components/pages/Logout";
 
 const AppContent = () => {
