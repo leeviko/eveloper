@@ -432,8 +432,16 @@ a {
   color: var(--white);
   font-family: inherit;
   margin: 5px;
-  border: none;
   background: none;
+  border: none;
+}
+
+.option-btn::after {
+  content: " ";
+  display: block;
+  border-top: 2px solid var(--accent-transparent);
+  border-bottom: 2px solid var(--accent-transparent);
+  border-radius: 2px;
 }
 
 .option-btn.highlight::after {
