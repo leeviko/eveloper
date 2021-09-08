@@ -133,6 +133,10 @@ a {
   color: var(--white);
 }
 
+.nav.sec-nav {
+  background: none;
+}
+
 .nav-container {
   display: flex;
   align-items: center;
@@ -141,6 +145,10 @@ a {
 .nav-brand {
   font-size: 1.4rem;
   font-weight: bold;
+}
+
+.nav-title {
+  margin: 0 10px;
 }
 
 .search-form {
@@ -203,13 +211,23 @@ a {
 
 .alert-link, .profile-nav-link {
   font-size: 0.9rem;
-  padding: 2px;
+  padding: 2px 5px;
   border-radius: 5px;
 }
 
 .alert-link:hover, .profile-nav-link:hover {
   background-color: var(--blue-transp);
 
+}
+
+.nav-close-btn img {
+  filter: var(--white-filter);
+  vertical-align: middle;
+  transition: 0.2s;
+}
+
+.nav-close-btn img:hover {
+  transform: var(--default-animation);
 }
 
 .dropdown.hide {

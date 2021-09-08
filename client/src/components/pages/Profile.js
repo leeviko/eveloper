@@ -20,8 +20,8 @@ const Profile = () => {
             <div className="profile-name">LePa123</div>
             <p className="profile-desc">Hello i am web developer and focusing on front end</p>
             <div className="profile-info">
-              <Link className="profile-link profile-info-text">https://github.com/</Link>
-              <Link className="profile-link profile-info-text">https://www.youtube.com</Link>
+              <Link className="profile-link profile-info-text" to="/">https://github.com/</Link>
+              <Link className="profile-link profile-info-text" to="/">https://www.youtube.com</Link>
               <span className="profile-info-text">Joined on Apr 23 2021</span>
             </div>
           </div>
