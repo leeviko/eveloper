@@ -466,7 +466,7 @@ a {
 }
 
 .post-content textarea {
-  padding: 15px;
+  padding: 15px 30px;
 
   color: var(--white);
   overflow-y: auto;
@@ -486,5 +486,8 @@ a {
 .editor-btn {
   font-family: "Poppins", sans-serif;
   margin-top: 10px;
+}
 
+.editor-preview {
+  color: var(--white);
 }

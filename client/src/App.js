@@ -51,6 +51,7 @@ const AppContent = () => {
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.auth.isLoading);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   useEffect(() => {
     dispatch(isAuth())
@@ -59,7 +60,7 @@ function App() {
   return (
     <Fragment>
       {
-        isLoading ? <Spinner /> : <AppContent />
+        isAuthenticated === null ? <Spinner /> : <AppContent />
       }
     </Fragment>
   );
