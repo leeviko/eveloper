@@ -1,25 +1,55 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import ReactMarkdown from "react-markdown";
-import { useSelector } from "react-redux";
+import remarkGfm from 'remark-gfm';
+import { useSelector, useDispatch } from "react-redux";
+import { addPost } from "../../../actions/postActions";
 import { Redirect } from "react-router-dom";
 
 import useForm from "../../../hooks/useForm";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
   const [showPreview, setShowPreview] = useState(false);
+  const [tagsArr, setTagsArr] = useState("");
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const user = useSelector(state => state.auth.user);
   const [values, handleChange] = useForm({ title: "", tags: "", content: "" });
 
+  const { tags } = values;
+
+  useEffect(() => {
+    setTagsArr([...tags.split(",")]);
+  }, [values.tags])
+
+  
   const onSubmit = (e) => {
     e.preventDefault();
+    
+    const { title, content } = values;
+
+    const uid = user.uid;
+
+    const newPost = {
+      title,
+      tags: tagsArr,
+      content,
+      uid
+    }
+
+    dispatch(addPost(newPost))
+
   }
 
-  return (
+  return ( 
     <Fragment>
+      { isAuthenticated === true ? "" : <Redirect to="/login" />}
       { showPreview ? 
-        <Preview values={values} setShowPreview={setShowPreview} showPreview={showPreview} /> : 
+        <Preview values={values} tagsArr={tagsArr} setTagsArr={setTagsArr} setShowPreview={setShowPreview} showPreview={showPreview} /> 
+        : 
         <Edit 
           isAuthenticated={isAuthenticated} 
+          tagsArr={tagsArr}
+          setTagsArr={setTagsArr}
           setShowPreview={setShowPreview}
           showPreview={showPreview}
           onSubmit={onSubmit}
@@ -34,7 +64,6 @@ const CreatePost = () => {
 const Edit = ({ isAuthenticated, setShowPreview, showPreview, onSubmit, values, handleChange }) => {
   return (
     <div className="create-post">
-      { isAuthenticated === true ? "" : <Redirect to="/login" />}
       <div className="editor">
         <div className="editor-options">
           <button className="option-btn highlight" onClick={() => setShowPreview(false)}>Edit</button>
@@ -61,7 +90,7 @@ const Edit = ({ isAuthenticated, setShowPreview, showPreview, onSubmit, values, 
           </div>
           <div className="post-content">
             <textarea
-              className="editor-content" 
+              className="editor-content p-content" 
               placeholder="Post content..."
               name="content"
               value={values.content}
@@ -78,7 +107,7 @@ const Edit = ({ isAuthenticated, setShowPreview, showPreview, onSubmit, values, 
   );
 }
 
-const Preview = ({ values, setShowPreview, showPreview }) => {
+const Preview = ({ values, setShowPreview, showPreview, setTagsArr, tagsArr }) => {
   console.log(values.content);
   return (
     <div className="create-post post-preview">
@@ -87,7 +116,24 @@ const Preview = ({ values, setShowPreview, showPreview }) => {
           <button className="option-btn" onClick={() => setShowPreview(false)}>Edit</button>
           <button className="option-btn highlight" onClick={() => setShowPreview(true)}>Preview</button>
         </div>
-        <ReactMarkdown className="editor editor-preview" children={values.content} />
+        <div className="editor-preview">
+          <div className="post-title">
+            <h1 className="editor-title">{values.title}</h1>
+            <div className="editor-tags">
+              {
+                tagsArr ?
+                tagsArr.map((tag, i) => (
+                  <div className="tag" key={i}>#{tag}</div>
+                ))
+                : null
+              }
+            </div>
+          </div>
+          <div className="post-content">
+            <ReactMarkdown className="p-content" children={values.content} remarkPlugins={[remarkGfm]} />
+          </div>
+          <input className="editor-btn btn" type="submit" value="Publish" />
+        </div>
       </div>
     </div>
   );

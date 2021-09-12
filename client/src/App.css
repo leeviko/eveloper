@@ -418,6 +418,7 @@ a {
 
 .editor {
   width: 60%;
+  min-width: 390px;
 }
 
 .editor-options {
@@ -459,15 +460,18 @@ a {
 }
 
 .post-title {
-  border-radius: 5px;
-  border: 1px solid var(--accent);
+  border-radius: 5px 5px 0 0;
+  border-top: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  border-right: 1px solid var(--accent); 
   background-color: var(--blue-transp2);
   display: flex;
   flex-direction: column;
   padding: 15px;
+  min-height: 93px;
 }
 
-.post-title input {
+.post-title .editor-title, .editor-tags {
   outline: none;
   padding: 5px 15px;
   font-family: inherit;
@@ -476,22 +480,19 @@ a {
   background: none;
 }
 
-.post-title .editor-title {
+.editor-title {
   font-size: 1.1rem;
 }
 
-.post-content {
-  margin-top: 15px;
-}
-
-.post-content textarea {
+.post-content .p-content{
   padding: 15px 30px;
-
+  outline: none;
   color: var(--white);
   overflow-y: auto;
   background-color: var(--blue-transp2);
-  border-radius: 5px;
+  border-radius: 0 0 5px 5px;
   border: 1px solid var(--accent);
+  border-top: none;
   width: 100%;
   resize: none;
   font-family: inherit;
@@ -508,6 +509,13 @@ a {
 }
 
 .editor-preview {
+  line-height: initial;
+  font-family: 'Roboto', sans-serif;
   color: var(--white);
 }
 
+.tag {
+  display: inline-flex;
+  font-size: 0.85rem;
+  margin-right: 10px;
+}

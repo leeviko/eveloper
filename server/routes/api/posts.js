@@ -23,7 +23,11 @@ router.post("/", [
     return res.status(422).json(errors.array());
   }
 
-  const { title, content, tags, uid } = req.body;
+  let { title, content, tags, uid } = req.body;
+
+  tags = tags.map((tag) => {
+    return tag.trim();
+  });
 
   // Remove all spaces from between words except one and replace it with dash
   const bid = title.replace(/\s{2,}/g,' ').trim().replace(/\s+/g, '-').toLowerCase();
