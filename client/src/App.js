@@ -12,6 +12,7 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
 import CreatePost from "./components/pages/CreateNew/CreatePost";
+import Post from "./components/pages/Post";
 import Logout from "./components/pages/Logout";
 
 const AppContent = () => {
@@ -41,6 +42,10 @@ const AppContent = () => {
         <Route path="/logout">
           <Navbar />
           <Logout />
+        </Route>
+        <Route path="/post/:id">
+          <Navbar />
+          <Post />
         </Route>
       </Switch>
     </div>

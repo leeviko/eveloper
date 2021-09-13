@@ -23,14 +23,12 @@ router.post("/", [
     return res.status(422).json(errors.array());
   }
 
-  let { title, content, tags, uid } = req.body;
+  let { title, content, tags, uid, bid } = req.body;
 
   tags = tags.map((tag) => {
     return tag.trim();
   });
 
-  // Remove all spaces from between words except one and replace it with dash
-  const bid = title.replace(/\s{2,}/g,' ').trim().replace(/\s+/g, '-').toLowerCase();
   
   const newPost ={
     title,
@@ -54,7 +52,7 @@ router.post("/", [
       } else if(err.code === "23503") {
         return res.status(400).json([{ msg: "Author doesnt exist..." }])
       } else {
-        return res.status(400).json([{ msg: err.detail }])
+        return res.status(400).json([{ msg: newPost.bid }])
       }
     } 
 

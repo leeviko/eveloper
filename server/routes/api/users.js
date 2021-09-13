@@ -92,6 +92,40 @@ router.post("/", [
 })
 
 /**
+ * @route  GET api/users/:slug
+ * @desc   Find user
+ * @access Public
+*/
+router.get("/:slug", [
+  check("searchQuery").trim().escape()
+], (req, res) => {
+  const searchQuery = req.params.slug;
+
+  // const query = {
+  //   name: "search-user",
+  //   text: "SELECT uid, name FROM users WHERE name LIKE %$1%",
+  //   values: [searchQuery],
+  // }
+  // console.log(searchQuery);
+
+  // Check if user already exists
+  const sql = "SELECT uid, name FROM users WHERE name LIKE %$1%";
+
+  pool.query(sql, [searchQuery], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }]);
+    }
+    res.json({
+      result
+    })
+
+  })
+
+
+
+})
+
+/**
  * @route  DELETE api/users/logout
  * @desc   Logout user
  * @access Public

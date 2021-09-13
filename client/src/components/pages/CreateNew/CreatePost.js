@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "../../../actions/postActions";
+import { clearErrors } from "../../../actions/errorActions";
 import { Redirect } from "react-router-dom";
 
 import useForm from "../../../hooks/useForm";
@@ -10,58 +11,102 @@ import useForm from "../../../hooks/useForm";
 const CreatePost = () => {
   const dispatch = useDispatch();
   const [showPreview, setShowPreview] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [tagsArr, setTagsArr] = useState("");
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const error = useSelector(state => state.error);
+  const post = useSelector(state => state.post);
+  const isLoading = useSelector(state => state.post.isLoading);
+  const [errors, setErrors] = useState([]);
   const user = useSelector(state => state.auth.user);
   const [values, handleChange] = useForm({ title: "", tags: "", content: "" });
 
   const { tags } = values;
+
+  // Clear errors on page refresh
+  useEffect(() => {
+    dispatch(clearErrors());
+    setErrors([])
+  }, [])
+  
+  // Check errors
+  useEffect(() => {
+    console.log("ERROR: ", error);
+    if(error.id === "POST_ERROR") {
+      setErrors([])
+      error.msg.map((msg) => (
+        setErrors(prev => [...prev, {msg: msg.msg, param: msg.param}])
+      ))
+    }
+  }, [error])
+  
+  useEffect(() => {
+    if(post.post && error.id != "POST_ERROR") {
+      setSubmitted(true)
+    } else {
+      setSubmitted(false)
+    }
+  }, [post])
 
   useEffect(() => {
     setTagsArr([...tags.split(",")]);
   }, [values.tags])
 
   
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
+
     e.preventDefault();
     
     const { title, content } = values;
 
     const uid = user.uid;
+    const bid = title.replace(/\s{2,}/g,' ').trim().replace(/\s+/g, '-').toLowerCase();
 
     const newPost = {
       title,
       tags: tagsArr,
       content,
-      uid
+      uid,
+      bid
     }
 
     dispatch(addPost(newPost))
-
-  }
+  } 
+  
 
   return ( 
     <Fragment>
+      { submitted && <Redirect to="/post/:id" />  }
       { isAuthenticated === true ? "" : <Redirect to="/login" />}
       { showPreview ? 
-        <Preview values={values} tagsArr={tagsArr} setTagsArr={setTagsArr} setShowPreview={setShowPreview} showPreview={showPreview} /> 
+        <Preview 
+          setShowPreview={setShowPreview} 
+          handleSubmit={handleSubmit} 
+          values={values} 
+          tagsArr={tagsArr} 
+        /> 
         : 
         <Edit 
-          isAuthenticated={isAuthenticated} 
-          tagsArr={tagsArr}
-          setTagsArr={setTagsArr}
           setShowPreview={setShowPreview}
-          showPreview={showPreview}
-          onSubmit={onSubmit}
+          handleSubmit={handleSubmit}
           values={values}
           handleChange={handleChange}
         /> 
       }
+          {
+            <ul className={"errors " + (errors[0] ? "show" : "hide") }>
+              {
+                errors ? errors.map((error, i) => (
+                  <li className="alert" key={i}>{error.msg}</li>
+                )) : null
+              }
+            </ul>
+          }
     </Fragment>
   )
 }
 
-const Edit = ({ isAuthenticated, setShowPreview, showPreview, onSubmit, values, handleChange }) => {
+const Edit = ({ setShowPreview, handleSubmit, values, handleChange }) => {
   return (
     <div className="create-post">
       <div className="editor">
@@ -69,7 +114,7 @@ const Edit = ({ isAuthenticated, setShowPreview, showPreview, onSubmit, values, 
           <button className="option-btn highlight" onClick={() => setShowPreview(false)}>Edit</button>
           <button className="option-btn" onClick={() => setShowPreview(true)}>Preview</button>
         </div>
-        <form className="editor-fields" onSubmit={(e) => onSubmit(e)}>
+        <form className="editor-fields" onSubmit={(e) => handleSubmit(e)}>
           <div className="post-title">
             <input 
               className="editor-title" 
@@ -107,7 +152,7 @@ const Edit = ({ isAuthenticated, setShowPreview, showPreview, onSubmit, values, 
   );
 }
 
-const Preview = ({ values, setShowPreview, showPreview, setTagsArr, tagsArr }) => {
+const Preview = ({ values, setShowPreview, tagsArr, handleSubmit }) => {
   console.log(values.content);
   return (
     <div className="create-post post-preview">
@@ -116,7 +161,7 @@ const Preview = ({ values, setShowPreview, showPreview, setTagsArr, tagsArr }) =
           <button className="option-btn" onClick={() => setShowPreview(false)}>Edit</button>
           <button className="option-btn highlight" onClick={() => setShowPreview(true)}>Preview</button>
         </div>
-        <div className="editor-preview">
+        <form className="editor-preview" onSubmit={(e) => handleSubmit(e)}>
           <div className="post-title">
             <h1 className="editor-title">{values.title}</h1>
             <div className="editor-tags">
@@ -133,7 +178,7 @@ const Preview = ({ values, setShowPreview, showPreview, setTagsArr, tagsArr }) =
             <ReactMarkdown className="p-content" children={values.content} remarkPlugins={[remarkGfm]} />
           </div>
           <input className="editor-btn btn" type="submit" value="Publish" />
-        </div>
+        </form>
       </div>
     </div>
   );

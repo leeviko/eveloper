@@ -1,5 +1,5 @@
 import axios from "axios";
-import { returnErrors } from "./errorActions";
+import { clearErrors, returnErrors } from "./errorActions";
 import {
   LOADING,
   GET_POSTS,
@@ -14,6 +14,7 @@ import {
 
 // Add post
 export const addPost = (post) => dispatch => {
+  dispatch({ type: POSTS_LOADING });
 
   const headers = {
     headers: {
@@ -23,11 +24,11 @@ export const addPost = (post) => dispatch => {
 
   axios.post("/api/posts", post, headers)
     .then((res) => {
-      console.log(res);
       dispatch({
         type: ADD_POST,
         payload: res.data
       });
+      dispatch(clearErrors())
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));

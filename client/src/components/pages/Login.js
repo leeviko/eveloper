@@ -13,7 +13,7 @@ const Login = () => {
   const [errors, setErrors] = useState([]);
   const [values, handleChange] = useForm({ email: "", password: "" });
 
-  // Clear errors on page refresh
+  // Clear errors
   useEffect(() => {
     dispatch(clearErrors());
     setErrors([])

@@ -23,13 +23,18 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case "ADD_POST":
+    case POSTS_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ADD_POST:
       return {
         ...state,
         isLoading: false,
-        post: action.payload,
+        post: action.payload.newPost,
       };
-    case "POST_ERROR":
+    case POST_ERROR:
       return {
         ...state,
         isLoading: false,
