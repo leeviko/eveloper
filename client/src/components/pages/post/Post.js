@@ -24,15 +24,6 @@ const Post = () => {
       setRenderPost(false)
     }
   }, [post, isLoading])
-  
-  useEffect(() => {
-    if(post && !isLoading) {
-      setRenderPost(true)
-    } else {
-      setRenderPost(false)
-    }
-  }, [post, isLoading])
-  
 
   return (
     <div className="post post-wrapper">
