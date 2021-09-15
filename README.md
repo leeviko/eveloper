@@ -4,7 +4,7 @@
 
 ## Features
 - [x] Registration and authentication
-- [ ] Create a post
+- [x] Create a post
 - [ ] Like post
 - [ ] Favorite post
 - [ ] Search for users and posts
