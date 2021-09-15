@@ -20,8 +20,8 @@ const CreatePost = () => {
   const [errors, setErrors] = useState([]);
   const user = useSelector(state => state.auth.user);
   const [values, handleChange] = useForm({ title: "", tags: "", content: "" });
-
-  const { tags } = values;
+  const [bid, setBid] = useState("");
+  const { tags, title, content } = values;
 
   // Clear errors on page refresh
   useEffect(() => {
@@ -31,7 +31,6 @@ const CreatePost = () => {
   
   // Check errors
   useEffect(() => {
-    console.log("ERROR: ", error);
     if(error.id === "POST_ERROR") {
       setErrors([])
       error.msg.map((msg) => (
@@ -40,6 +39,7 @@ const CreatePost = () => {
     }
   }, [error])
   
+  // Is post submitted
   useEffect(() => {
     if(post.post && error.id != "POST_ERROR") {
       setSubmitted(true)
@@ -47,20 +47,16 @@ const CreatePost = () => {
       setSubmitted(false)
     }
   }, [post])
-
+  
   useEffect(() => {
     setTagsArr([...tags.split(",")]);
-  }, [values.tags])
-
+    setBid(title.replace(/\s{2,}/g,' ').trim().replace(/\s+/g, '-').toLowerCase())
+  }, [values])
   
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    
-    const { title, content } = values;
-
+    console.log(bid);
     const uid = user.uid;
-    const bid = title.replace(/\s{2,}/g,' ').trim().replace(/\s+/g, '-').toLowerCase();
 
     const newPost = {
       title,
@@ -73,10 +69,9 @@ const CreatePost = () => {
     dispatch(addPost(newPost))
   } 
   
-
   return ( 
     <Fragment>
-      { submitted && <Redirect to="/post/:id" />  }
+      { submitted && <Redirect to={`/post/${bid}`} />  }
       { isAuthenticated === true ? "" : <Redirect to="/login" />}
       { showPreview ? 
         <Preview 
@@ -93,7 +88,7 @@ const CreatePost = () => {
           handleChange={handleChange}
         /> 
       }
-          {
+          {/* {
             <ul className={"errors " + (errors[0] ? "show" : "hide") }>
               {
                 errors ? errors.map((error, i) => (
@@ -101,23 +96,23 @@ const CreatePost = () => {
                 )) : null
               }
             </ul>
-          }
+          } */}
     </Fragment>
   )
 }
 
 const Edit = ({ setShowPreview, handleSubmit, values, handleChange }) => {
   return (
-    <div className="create-post">
-      <div className="editor">
+    <div className="post post-editor">
+      <div className="post-container">
         <div className="editor-options">
           <button className="option-btn highlight" onClick={() => setShowPreview(false)}>Edit</button>
           <button className="option-btn" onClick={() => setShowPreview(true)}>Preview</button>
         </div>
-        <form className="editor-fields" onSubmit={(e) => handleSubmit(e)}>
-          <div className="post-title">
+        <form className="post-fields" onSubmit={(e) => handleSubmit(e)}>
+          <div className="post-upper">
             <input 
-              className="editor-title" 
+              className="post-title" 
               placeholder="Post title..." 
               type="text" 
               name="title"
@@ -153,17 +148,16 @@ const Edit = ({ setShowPreview, handleSubmit, values, handleChange }) => {
 }
 
 const Preview = ({ values, setShowPreview, tagsArr, handleSubmit }) => {
-  console.log(values.content);
   return (
-    <div className="create-post post-preview">
-      <div className="editor">
+    <div className="post post-preview">
+      <div className="post-container">
         <div className="editor-options">
           <button className="option-btn" onClick={() => setShowPreview(false)}>Edit</button>
           <button className="option-btn highlight" onClick={() => setShowPreview(true)}>Preview</button>
         </div>
-        <form className="editor-preview" onSubmit={(e) => handleSubmit(e)}>
-          <div className="post-title">
-            <h1 className="editor-title">{values.title}</h1>
+        <form className="post-preview" onSubmit={(e) => handleSubmit(e)}>
+          <div className="post-upper">
+            <h1 className="post-title">{values.title}</h1>
             <div className="editor-tags">
               {
                 tagsArr ?

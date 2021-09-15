@@ -7,7 +7,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGOUT_SUCCESS,
-  GET_POSTS,
+  GET_POST,
   ADD_POST,
   LIKE_POST,
   FAVORITE_POST,
@@ -33,6 +33,12 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         post: action.payload.newPost,
+      };
+    case GET_POST:
+      return {
+        ...state,
+        isLoading: false,
+        post: action.payload.post,
       };
     case POST_ERROR:
       return {

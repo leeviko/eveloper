@@ -2,7 +2,7 @@ import axios from "axios";
 import { clearErrors, returnErrors } from "./errorActions";
 import {
   LOADING,
-  GET_POSTS,
+  GET_POST,
   ADD_POST,
   LIKE_POST,
   FAVORITE_POST,
@@ -26,6 +26,32 @@ export const addPost = (post) => dispatch => {
     .then((res) => {
       dispatch({
         type: ADD_POST,
+        payload: res.data
+      });
+      dispatch(clearErrors())
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
+      dispatch({
+        type: POST_ERROR
+      })
+    })
+}
+
+// Get post
+export const getPost = (id) => dispatch => {
+  dispatch({ type: POSTS_LOADING });
+
+  const headers = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  axios.get(`/api/posts/${id}`, headers)
+    .then((res) => {
+      dispatch({
+        type: GET_POST,
         payload: res.data
       });
       dispatch(clearErrors())
