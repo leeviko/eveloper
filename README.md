@@ -7,6 +7,7 @@
 - [x] Create a post
 - [ ] Like post
 - [ ] Favorite post
+- [ ] Edit post
 - [ ] Search for users and posts
 - [ ] Search for posts by tag, user or popularity
 - [ ] Follow user

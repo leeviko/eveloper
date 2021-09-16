@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const LoggedIn = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <Fragment>
+    <>
       <Link to="/create-new" className="nav-item create-new-btn btn">Create a Post</Link>
       <button className="nav-item nav-item-btn alert-link"><img alt="" src={AlertImg} /></button>
       <button
@@ -26,16 +26,16 @@ const LoggedIn = () => {
         <span>{username}</span>
         <Dropdown show={showMenu} />
       </button>
-    </Fragment>
+    </>
   )
 }
 
 const NotLoggedIn = () => {
   return (
-    <Fragment>
+    <>
       <Link className="nav-item btn-outline" to="/login">Login</Link>
       <Link className="nav-item btn" to="/register">Register</Link>
-    </Fragment>
+    </>
   )
 }
 

@@ -1,12 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useSelector, useDispatch } from "react-redux";
-import { addPost } from "../../../actions/postActions";
+import { addPost, clearPosts } from "../../../actions/postActions";
 import { clearErrors } from "../../../actions/errorActions";
 import { Redirect } from "react-router-dom";
 
 import useForm from "../../../hooks/useForm";
+import Tag from "../post/Tag";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -15,7 +18,7 @@ const CreatePost = () => {
   const [tagsArr, setTagsArr] = useState("");
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const error = useSelector(state => state.error);
-  const post = useSelector(state => state.post);
+  const post = useSelector(state => state.post.post);
   const isLoading = useSelector(state => state.post.isLoading);
   const [errors, setErrors] = useState([]);
   const user = useSelector(state => state.auth.user);
@@ -26,6 +29,7 @@ const CreatePost = () => {
   // Clear errors on page refresh
   useEffect(() => {
     dispatch(clearErrors());
+    dispatch(clearPosts());
     setErrors([])
   }, [])
   
@@ -41,9 +45,11 @@ const CreatePost = () => {
   
   // Is post submitted
   useEffect(() => {
-    if(post.post && error.id != "POST_ERROR") {
-      setSubmitted(true)
-    } else {
+    try {
+      if(post.newPost && error.id != "POST_ERROR") {
+        setSubmitted(true)
+      }
+    } catch(err) {
       setSubmitted(false)
     }
   }, [post])
@@ -55,9 +61,8 @@ const CreatePost = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(bid);
-    const uid = user.uid;
 
+    const uid = user.uid;
     const newPost = {
       title,
       tags: tagsArr,
@@ -65,13 +70,12 @@ const CreatePost = () => {
       uid,
       bid
     }
-
     dispatch(addPost(newPost))
   } 
   
   return ( 
     <Fragment>
-      { submitted && <Redirect to={`/post/${bid}`} />  }
+      {/* { submitted && <Redirect to={`/post/${bid}`} />  } */}
       { isAuthenticated === true ? "" : <Redirect to="/login" />}
       { showPreview ? 
         <Preview 
@@ -130,7 +134,7 @@ const Edit = ({ setShowPreview, handleSubmit, values, handleChange }) => {
           </div>
           <div className="post-content">
             <textarea
-              className="editor-content p-content" 
+              className="editor-content p-content-editor" 
               placeholder="Post content..."
               name="content"
               value={values.content}
@@ -162,14 +166,36 @@ const Preview = ({ values, setShowPreview, tagsArr, handleSubmit }) => {
               {
                 tagsArr ?
                 tagsArr.map((tag, i) => (
-                  <div className="tag" key={i}>#{tag}</div>
+                  <Tag name={tag} key={i} />
                 ))
                 : null
               }
             </div>
           </div>
           <div className="post-content">
-            <ReactMarkdown className="p-content" children={values.content} remarkPlugins={[remarkGfm]} />
+            <ReactMarkdown
+              className="p-content-live" 
+              children={values.content} 
+              remarkPlugins={[remarkGfm]} 
+              components={{
+                code({node, inline, className, children, ...props}) {
+                  const match = /language-(\w+)/.exec(className || '')
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      children={String(children).replace(/\n$/, '')}
+                      style={dark}
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    />
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+              }}
+            />
           </div>
           <input className="editor-btn btn" type="submit" value="Publish" />
         </form>

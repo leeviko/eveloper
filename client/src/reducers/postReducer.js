@@ -1,19 +1,12 @@
 import {
-  AUTH_ERROR,
-  AUTH_SUCCESS,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOADING,
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  LOGOUT_SUCCESS,
   GET_POST,
   ADD_POST,
   LIKE_POST,
   FAVORITE_POST,
   DELETE_POST,
   POSTS_LOADING,
-  POST_ERROR
+  POST_ERROR,
+  CLEAR_POSTS
 } from "../actions/types";
 
 const initialState = {
@@ -32,14 +25,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        post: action.payload.newPost,
+        post: action.payload,
       };
     case GET_POST:
       return {
         ...state,
         isLoading: false,
-        post: action.payload.post,
+        post: action.payload,
       };
+    case CLEAR_POSTS:
     case POST_ERROR:
       return {
         ...state,

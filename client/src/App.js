@@ -35,10 +35,6 @@ const AppContent = () => {
           <Navbar />
           <Profile />
         </Route>
-        <Route path="/create-new">
-          <CreateNewNav />
-          <CreatePost />
-        </Route>
         <Route path="/logout">
           <Navbar />
           <Logout />
@@ -46,6 +42,10 @@ const AppContent = () => {
         <Route path="/post/:id">
           <Navbar />
           <Post />
+        </Route>
+        <Route path="/create-new">
+          <CreateNewNav />
+          <CreatePost />
         </Route>
       </Switch>
     </div>

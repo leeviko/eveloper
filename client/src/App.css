@@ -8,11 +8,13 @@
   --accent-hover: #297cbb;
   --accent-transparent: hsla(206, 96%, 59%, 0.15);
 
-  --dark-blue: #082032;
+  --dark-blue: #061927;
   --light-blue: #0e3757;
   --blue: #0C2F49;
   --blue-transp: hsla(206, 96%, 59%, 0.15);
-  --blue-transp2: hsla(206, 72%, 17%, 0.5);
+  --blue-post: hsl(206, 72%, 17%);
+  --blue-post-transp: hsla(206, 96%, 59%, 0.05);
+
 
   --danger: #fb3333;
   --danger-transp: #fb333310;
@@ -389,7 +391,7 @@ a {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid var(--accent);
-  background-color: var(--blue-transp2);
+  background-color: var(--blue-post);
 }
 
 .profile-stats {
@@ -407,7 +409,7 @@ a {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid var(--accent);
-  background-color: var(--blue-transp2);
+  background-color: var(--blue-post);
 }
 
 
@@ -464,10 +466,10 @@ a {
 
 .post-upper {
   border-radius: 5px 5px 0 0;
-  border-top: 1px solid var(--accent);
+  /* border-top: 1px solid var(--accent);
   border-left: 1px solid var(--accent);
-  border-right: 1px solid var(--accent); 
-  background-color: var(--blue-transp2);
+  border-right: 1px solid var(--accent);  */
+  background-color: var(--blue-post);
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -484,23 +486,36 @@ a {
 }
 
 .post-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
-.post-content .p-content{
+.post-content {
+  background-color: var(--blue-post);
+  border-radius: 0 0 5px 5px;
   padding: 15px 30px;
+  color: var(--white);
+}
+
+.post-content .p-content-live {
+  overflow-y: auto;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+}
+
+.post-content .p-content-editor {
   outline: none;
   color: var(--white);
   overflow-y: auto;
-  background-color: var(--blue-transp2);
-  border-radius: 0 0 5px 5px;
-  border: 1px solid var(--accent);
-  border-top: none;
+  border: none;
   width: 100%;
-  resize: none;
+  background: none;
   font-family: inherit;
   min-height: 65vh;
+  resize: none;
 }
+
+
 
 .post-content textarea::placeholder {
   color: var(--white);
@@ -520,6 +535,24 @@ a {
   display: inline-flex;
   font-size: 0.80rem;
   margin-right: 10px;
+}
+
+.post-actions {
+  display: flex;
+  color: var(--white);
+}
+
+.post-action {
+  margin-right: 20px;
+}
+
+.post-action > img,
+.post-action > span {
+  vertical-align: middle;
+}
+
+.post-actions img {
+  filter: var(--white-filter);
 }
 
 .post-sidebar {

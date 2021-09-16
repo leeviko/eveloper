@@ -17,3 +17,4 @@ export const LIKE_POST = "LIKE_POST";
 export const FAVORITE_POST = "FAVORITE_POST";
 export const POSTS_LOADING = "POSTS_LOADING";
 export const POST_ERROR = "POST_ERROR";
+export const CLEAR_POSTS = "CLEAR_POSTS";

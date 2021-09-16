@@ -12,7 +12,7 @@ const CreateNewNav = () => {
     <nav className="nav sec-nav">
       <div className="nav-container">
         <Link className="nav-brand" to="/">Eveloper</Link>
-        <Link className="nav-title" to="/">Create Post</Link>
+        <Link className="nav-title" to="/create-new">Create Post</Link>
         <div className={"nav-items " + (isLoading ? "hide" : "")}>
           <Link className="nav-close-btn" to="/"><img alt="" src={Close} /></Link>
         </div>

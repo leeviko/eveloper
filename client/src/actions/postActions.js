@@ -8,7 +8,8 @@ import {
   FAVORITE_POST,
   DELETE_POST,
   POSTS_LOADING,
-  POST_ERROR
+  POST_ERROR,
+  CLEAR_POSTS
 } from "../actions/types";
 
 
@@ -62,4 +63,10 @@ export const getPost = (id) => dispatch => {
         type: POST_ERROR
       })
     })
+}
+
+export const clearPosts = () => {
+  return {
+    type: CLEAR_POSTS
+  }
 }
