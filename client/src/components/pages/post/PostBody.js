@@ -2,6 +2,8 @@ import React from 'react';
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import Tag from "./Tag";
 
@@ -10,7 +12,6 @@ import LikedImg from "../../../images/liked.svg";
 import ChatImg from "../../../images/chat.svg";
 
 const PostBody = ({ post }) => {
-  
   return (
     <>
       <div className="post-container">
@@ -28,7 +29,28 @@ const PostBody = ({ post }) => {
             </div>
           </div>
           <div className="post-content">
-            <ReactMarkdown className="p-content-live" children={post.content} remarkPlugins={[remarkGfm]} />
+            <ReactMarkdown
+              className="p-content-live" 
+              children={post.content} 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({node, inline, className, children, ...props}) {
+                  const match = /language-(\w+)/.exec(className || '')
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      children={String(children).replace(/\n$/, '')}
+                      style={atomDark}
+                      language={match[1]}
+                      {...props}
+                    />
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+              }} 
+            />
             <div className="post-actions">
               <UserActions /> 
             </div>

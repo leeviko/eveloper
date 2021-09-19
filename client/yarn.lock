@@ -5174,13 +5174,6 @@
   dependencies:
     "format" "^0.2.0"
 
-"fault@^2.0.0":
-  "integrity" "sha512-JsDj9LFcoC+4ChII1QpXPA7YIaY8zmqPYw7h9j5n7St7a0BBKfNnwEBAUQRBx70o2q4rs+BeSNHk8Exm6xE7fQ=="
-  "resolved" "https://registry.npmjs.org/fault/-/fault-2.0.0.tgz"
-  "version" "2.0.0"
-  dependencies:
-    "format" "^0.2.0"
-
 "faye-websocket@^0.11.3":
   "integrity" "sha512-D2y4bovYpzziGgbHYtGCMjlJM36vAl/y+xUyn1C+FVx8szd1E+86KwVw6XvYSzOP8iMpm1X0I4xJD+QtUb36OA=="
   "resolved" "https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.11.3.tgz"
@@ -5706,27 +5699,10 @@
     "inherits" "^2.0.3"
     "minimalistic-assert" "^1.0.1"
 
-"hast-util-is-element@^2.0.0":
-  "integrity" "sha512-ag0fiZfRWsPiR1udvnSbaazJLGv8qd8E+/e3rW8rUZhbKG4HNJmFL4QkEceN+22BgE+uozXY30z/s+2dL6Z++g=="
-  "resolved" "https://registry.npmjs.org/hast-util-is-element/-/hast-util-is-element-2.1.1.tgz"
-  "version" "2.1.1"
-  dependencies:
-    "@types/hast" "^2.0.0"
-    "@types/unist" "^2.0.0"
-
 "hast-util-parse-selector@^2.0.0":
   "integrity" "sha512-7j6mrk/qqkSehsM92wQjdIgWM2/BW61u/53G6xmC8i1OmEdKLHbk419QKQUjz6LglWsfqoiHmyMRkP1BGjecNQ=="
   "resolved" "https://registry.npmjs.org/hast-util-parse-selector/-/hast-util-parse-selector-2.2.5.tgz"
   "version" "2.2.5"
-
-"hast-util-to-text@^3.0.0":
-  "integrity" "sha512-Od9EL2sV06n5YIsq169krRA3mSOWjFnLZL0qMpCRSWcEoq9iodC2aEMhWge7b3xzXfHRs9UT3r42i8iOVQwvbg=="
-  "resolved" "https://registry.npmjs.org/hast-util-to-text/-/hast-util-to-text-3.1.0.tgz"
-  "version" "3.1.0"
-  dependencies:
-    "@types/hast" "^2.0.0"
-    "hast-util-is-element" "^2.0.0"
-    "unist-util-find-after" "^4.0.0"
 
 "hastscript@^6.0.0":
   "integrity" "sha512-nDM6bvd7lIqDUiYEiu5Sl/+6ReP0BMk/2f4U/Rooccxkj0P5nm+acM5PrGJ/t5I8qPGiqZSE6hVAwZEdZIvP4w=="
@@ -5753,11 +5729,6 @@
   "integrity" "sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A=="
   "resolved" "https://registry.npmjs.org/highlight.js/-/highlight.js-10.7.3.tgz"
   "version" "10.7.3"
-
-"highlight.js@~11.2.0":
-  "integrity" "sha512-JOySjtOEcyG8s4MLR2MNbLUyaXqUunmSnL2kdV/KuGJOmHZuAR5xC54Ko7goAXBWNhf09Vy3B+U7vR62UZ/0iw=="
-  "resolved" "https://registry.npmjs.org/highlight.js/-/highlight.js-11.2.0.tgz"
-  "version" "11.2.0"
 
 "history@^4.9.0":
   "integrity" "sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew=="
@@ -7440,15 +7411,6 @@
   dependencies:
     "fault" "^1.0.0"
     "highlight.js" "~10.7.0"
-
-"lowlight@^2.0.0":
-  "integrity" "sha512-KDl2wTuCDk1+aJx/gfi4FPAxRNZ4fDa1zHQ0zpSjEf6qxmBD+1Pk6KriHikaQBshbS9gMIkZ/XCDT6IKAEKDsg=="
-  "resolved" "https://registry.npmjs.org/lowlight/-/lowlight-2.2.1.tgz"
-  "version" "2.2.1"
-  dependencies:
-    "@types/hast" "^2.0.0"
-    "fault" "^2.0.0"
-    "highlight.js" "~11.2.0"
 
 "lru-cache@^5.1.1":
   "integrity" "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="
@@ -10323,17 +10285,6 @@
   dependencies:
     "jsesc" "~0.5.0"
 
-"rehype-highlight@^5.0.0":
-  "integrity" "sha512-LXbdRzHM0PNzVfHvbiF+r/BZzCHSdtpSTCnJej6ZuvJKDKRVfwl0Io5b81gWqUnfZmpzjhPAzm5es4iikv1jzg=="
-  "resolved" "https://registry.npmjs.org/rehype-highlight/-/rehype-highlight-5.0.0.tgz"
-  "version" "5.0.0"
-  dependencies:
-    "@types/hast" "^2.0.0"
-    "hast-util-to-text" "^3.0.0"
-    "lowlight" "^2.0.0"
-    "unified" "^10.0.0"
-    "unist-util-visit" "^4.0.0"
-
 "relateurl@^0.2.7":
   "integrity" "sha1-VNvzd+UUQKypCkzSdGANP/LYiKk="
   "resolved" "https://registry.npmjs.org/relateurl/-/relateurl-0.2.7.tgz"
@@ -11994,14 +11945,6 @@
   "version" "3.0.0"
   dependencies:
     "@types/unist" "^2.0.0"
-
-"unist-util-find-after@^4.0.0":
-  "integrity" "sha512-gfpsxKQde7atVF30n5Gff2fQhAc4/HTOV4CvkXpTg9wRfQhZWdXitpyXHWB6YcYgnsxLx+4gGHeVjCTAAp9sjw=="
-  "resolved" "https://registry.npmjs.org/unist-util-find-after/-/unist-util-find-after-4.0.0.tgz"
-  "version" "4.0.0"
-  dependencies:
-    "@types/unist" "^2.0.0"
-    "unist-util-is" "^5.0.0"
 
 "unist-util-generated@^2.0.0":
   "integrity" "sha512-TiWE6DVtVe7Ye2QxOVW9kqybs6cZexNwTwSMVgkfjEReqy/xwGpAXb99OxktoWwmL+Z+Epb0Dn8/GNDYP1wnUw=="

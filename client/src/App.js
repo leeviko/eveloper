@@ -1,4 +1,5 @@
 import './App.css';
+import "./Markdown.css";
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuth } from "./actions/authActions"

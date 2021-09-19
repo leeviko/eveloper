@@ -1,4 +1,3 @@
-import "../../../Markdown.css";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from "../../../actions/postActions";

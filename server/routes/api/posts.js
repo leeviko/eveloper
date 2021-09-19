@@ -12,7 +12,7 @@ const pool = require("../../config/db");
 */
 router.post("/", [
   check("title").escape().isLength({ max: 50, min: 4 }),
-  check("content").escape().isLength({ min: 10, max: 5000 }),
+  check("content").isLength({ min: 10, max: 5000 }),
   check("tags").toArray().isArray({ max: 4, min: 1 }),
   check("author").escape().trim()
 ], auth, (req, res) => {
@@ -29,7 +29,6 @@ router.post("/", [
     return tag.trim();
   });
 
-  
   const newPost ={
     title,
     content,

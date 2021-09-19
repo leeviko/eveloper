@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useSelector, useDispatch } from "react-redux";
+
 import { addPost, clearPosts } from "../../../actions/postActions";
 import { clearErrors } from "../../../actions/errorActions";
 import { Redirect } from "react-router-dom";
@@ -74,7 +75,7 @@ const CreatePost = () => {
   } 
   
   return ( 
-    <Fragment>
+    <>
       {/* { submitted && <Redirect to={`/post/${bid}`} />  } */}
       { isAuthenticated === true ? "" : <Redirect to="/login" />}
       { showPreview ? 
@@ -101,7 +102,7 @@ const CreatePost = () => {
               }
             </ul>
           } */}
-    </Fragment>
+    </>
   )
 }
 
@@ -153,13 +154,13 @@ const Edit = ({ setShowPreview, handleSubmit, values, handleChange }) => {
 
 const Preview = ({ values, setShowPreview, tagsArr, handleSubmit }) => {
   return (
-    <div className="post post-preview">
+    <div className="post post-wrapper">
       <div className="post-container">
         <div className="editor-options">
           <button className="option-btn" onClick={() => setShowPreview(false)}>Edit</button>
           <button className="option-btn highlight" onClick={() => setShowPreview(true)}>Preview</button>
         </div>
-        <form className="post-preview" onSubmit={(e) => handleSubmit(e)}>
+        <form className="post-body" onSubmit={(e) => handleSubmit(e)}>
           <div className="post-upper">
             <h1 className="post-title">{values.title}</h1>
             <div className="editor-tags">
@@ -183,9 +184,8 @@ const Preview = ({ values, setShowPreview, tagsArr, handleSubmit }) => {
                   return !inline && match ? (
                     <SyntaxHighlighter
                       children={String(children).replace(/\n$/, '')}
-                      style={dark}
+                      style={atomDark}
                       language={match[1]}
-                      PreTag="div"
                       {...props}
                     />
                   ) : (
