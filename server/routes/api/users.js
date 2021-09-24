@@ -101,18 +101,10 @@ router.get("/:slug", [
 ], (req, res) => {
   const searchQuery = req.params.slug;
 
-  // const query = {
-  //   name: "search-user",
-  //   text: "SELECT uid, name FROM users WHERE name LIKE %$1%",
-  //   values: [searchQuery],
-  // }
-  // console.log(searchQuery);
+  const sql = "SELECT uid, name FROM users WHERE name LIKE $1";
 
-  // Check if user already exists
-  const sql = "SELECT uid, name FROM users WHERE name LIKE %$1%";
-
-  pool.query(sql, [searchQuery], (err, result) => {
-    if(err) {
+  pool.query(sql, ["%" + searchQuery + "%"], (err, result) => {
+    if (err) {
       return res.status(400).json([{ msg: err }]);
     }
     res.json({
@@ -120,8 +112,6 @@ router.get("/:slug", [
     })
 
   })
-
-
 
 })
 

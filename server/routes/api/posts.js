@@ -64,6 +64,39 @@ router.post("/", [
 })
 
 /**
+ * @route  Get api/posts/search/:slug
+ * @desc   Get posts by title
+ * @access Public
+*/
+router.get("/search/:slug", [
+  check("searchQuery").escape().trim().isLength({ min: 3 }).withMessage("Search must be at least 3 chars long.")
+], (req, res) => {
+  // Check for errors during validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors.array());
+  }
+
+  const searchQuery = req.params.slug;
+
+  const sql = "SELECT * FROM posts WHERE title LIKE $1";
+
+  pool.query(sql, ["%" + searchQuery + "%"], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    const posts = result.rows
+
+    res.json({
+      posts
+    })
+
+  })
+
+})
+
+/**
  * @route  Get api/posts/:slug
  * @desc   Get single post
  * @access Public

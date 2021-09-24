@@ -76,7 +76,7 @@ const CreatePost = () => {
   
   return ( 
     <>
-      {/* { submitted && <Redirect to={`/post/${bid}`} />  } */}
+      { submitted && <Redirect to={`/post/${bid}`} />  }
       { isAuthenticated === true ? "" : <Redirect to="/login" />}
       { showPreview ? 
         <Preview 

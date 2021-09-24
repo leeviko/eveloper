@@ -18,3 +18,8 @@ export const FAVORITE_POST = "FAVORITE_POST";
 export const POSTS_LOADING = "POSTS_LOADING";
 export const POST_ERROR = "POST_ERROR";
 export const CLEAR_POSTS = "CLEAR_POSTS";
+
+export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
+export const SEARCH_FAIL = "SEARCH_FAIL"
+export const CLEAR_SEARCH = "CLEAR_SEARCH";
+export const SEARCH_LOADING = "SEARCH_LOADING";

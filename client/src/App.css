@@ -472,13 +472,17 @@ a {
   background-color: var(--blue-post);
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   min-height: 93px;
+}
+
+.post-fields .post-upper {
+  padding: 15px;
 }
 
 .post-upper .post-title, .editor-tags {
   outline: none;
-  padding: 5px 15px;
+  padding: 0px 15px;
   font-family: inherit;
   color: var(--white);
   border: none;
@@ -486,13 +490,13 @@ a {
 }
 
 .post-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .post-content {
   background-color: var(--blue-post);
   border-radius: 0 0 5px 5px;
-  padding: 15px 30px;
+  padding: 5px 15px 15px 30px;
   color: var(--white);
 }
 

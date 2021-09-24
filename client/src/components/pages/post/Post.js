@@ -18,9 +18,11 @@ const Post = () => {
   }, [dispatch])
   
   useEffect(() => {
-    if(post && !isLoading) {
-      setRenderPost(true)
-    } else {
+    try {
+      if(post.post) {
+        setRenderPost(true)
+      }
+    } catch(err) {
       setRenderPost(false)
     }
     console.log("POST: ",post);
