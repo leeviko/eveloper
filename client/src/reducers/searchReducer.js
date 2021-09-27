@@ -10,7 +10,7 @@ const initialState = {
   isLoading: false
 }
 
-export default (state = intitialState, action) => {
+export default (state = initialState, action) => {
   switch(action.type) {
     case SEARCH_SUCCESS:
       return {

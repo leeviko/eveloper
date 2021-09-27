@@ -22,12 +22,9 @@ export const search = (searchQuery) => dispatch => {
     axios.get(`/api/search/users/${searchQuery}`, headers), 
   ])
   .then(axios.spread((postsRes, usersRes) => {
-    console.log(postsRes.data);
-    console.log(usersRes.data);
-    // console.log("POST RES: " + + " USERS RES: " + usersRes);
     dispatch({ 
       type: SEARCH_SUCCESS, 
-      payload: { usersRes, postsRes } 
+      payload: { usersRes: usersRes.data.usersRes, postsRes: postsRes.data.postsRes } 
     })
   }))
   .catch((err) => {
