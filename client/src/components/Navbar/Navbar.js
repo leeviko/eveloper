@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
-import Search from "./Search";
+import SearchForm from "./SearchForm";
 import Dropdown from "./Dropdown";
 
 import AccountImg from "../../images/account_fill.svg";
@@ -47,7 +47,7 @@ const Navbar = () => {
     <nav className="nav">
       <div className="nav-container">
         <Link className="nav-brand" to="/">Eveloper</Link>
-        <Search />
+        <SearchForm />
         <div className={"nav-items " + (isLoading ? "hide" : "")}>
           {
             isAuthenticated ? <LoggedIn /> : <NotLoggedIn />

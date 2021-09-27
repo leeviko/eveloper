@@ -562,3 +562,10 @@ a {
 .post-sidebar {
   color: var(--white);
 }
+
+/* SEARCH RESULT */
+.search-results {
+  color: var(--white);
+}
+
+/* SMALL POST */

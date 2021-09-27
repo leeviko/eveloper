@@ -15,6 +15,7 @@ import Profile from "./components/pages/Profile";
 import CreatePost from "./components/pages/CreateNew/CreatePost";
 import Post from "./components/pages/post/Post";
 import Logout from "./components/pages/Logout";
+import Search from "./components/pages/Search";
 
 const AppContent = () => {
   return (
@@ -47,6 +48,10 @@ const AppContent = () => {
         <Route path="/create-new">
           <CreateNewNav />
           <CreatePost />
+        </Route>
+        <Route path="/search/:query">
+          <Navbar />
+          <Search />
         </Route>
       </Switch>
     </div>

@@ -35,3 +35,9 @@ export const search = (searchQuery) => dispatch => {
   })
 
 }
+
+export const clearSearch = () => {
+  return {
+    type: CLEAR_SEARCH
+  }
+}

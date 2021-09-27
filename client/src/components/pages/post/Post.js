@@ -25,7 +25,6 @@ const Post = () => {
     } catch(err) {
       setRenderPost(false)
     }
-    console.log("POST: ",post);
   }, [post, isLoading])
 
   // useEffect(() => {
