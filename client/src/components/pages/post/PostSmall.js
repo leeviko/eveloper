@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 import Tag from "./Tag";
 
-const PostSmall = ({ title, tags }) => {
+const PostSmall = ({ bid, title, tags }) => {
   return (
     <div className="post-small">
-      <h1 className="post-title">{title}</h1>
+      <h1 className="post-title"><Link to={"/post/" + bid}>{title}</Link></h1>
       <div className="editor-tags">
         {
           tags.map((tag, i) => (

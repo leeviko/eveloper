@@ -15,18 +15,22 @@ const Search = () => {
   const [submitted, setSubmitted] = useState(false);
   
   useEffect(() => {
+    // setSubmitted(false)
+    console.log("REFRESH");
     dispatch(clearSearch())
     dispatch(search(query))
-    console.log("a");
   }, [])
 
   useEffect(() => {
     try {
+      console.log("AAA");
       if(searchResult && error.id != "SEARCH_FAIL") {
+        console.log(searchResult);
         setSubmitted(true)
       }
     } catch(err) {
       setSubmitted(false)
+      console.log("error: ", err);
     }
   }, [searchResult])
 
@@ -38,9 +42,10 @@ const Search = () => {
     <div className="search-results posts-page">
       <div className="search-page-container">
         {
+          !isLoading &&
           submitted &&
           searchResult["postsRes"].map((res, i) => 
-            <PostSmall key={i} title={res.title} tags={res.tags} />
+            <PostSmall key={i} bid={res.bid} title={res.title} tags={res.tags} />
           )
         }
       </div>

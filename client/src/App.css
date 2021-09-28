@@ -566,6 +566,15 @@ a {
 /* SEARCH RESULT */
 .search-results {
   color: var(--white);
+  display: flex;
+  justify-content: center;
 }
 
 /* SMALL POST */
+
+.post-small {
+  margin: 15px 0;
+  background-color: var(--blue-post);
+  padding: 15px;
+  border-radius: 5px;
+}

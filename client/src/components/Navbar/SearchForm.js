@@ -10,13 +10,16 @@ const SearchForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    history.push(`/search/${values.searchValue}`)
-    setSubmitted(true)
+    if(!values.searchValue.trim()) {
+      setSubmitted(false)
+    } else {
+      history.push(`/search/${values.searchValue}`)
+      setSubmitted(true)
+    }
   }
 
   return (
     <>
-      {/* { submitted && <Redirect to={`/search/${values.searchValue}`} />  } */}
       <form className="search-form" onSubmit={(e) => onSubmit(e)}>
         <input
           className="search" 
