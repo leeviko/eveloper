@@ -6,7 +6,7 @@ import Tag from "./Tag";
 const PostSmall = ({ bid, title, tags }) => {
   return (
     <div className="post-small">
-      <h1 className="post-title"><Link to={"/post/" + bid}>{title}</Link></h1>
+      <h1 className="post-small-title"><Link to={"/post/" + bid}>{title}</Link></h1>
       <div className="editor-tags">
         {
           tags.map((tag, i) => (

@@ -15,8 +15,6 @@ const Search = () => {
   const [submitted, setSubmitted] = useState(false);
   
   useEffect(() => {
-    // setSubmitted(false)
-    console.log("REFRESH");
     dispatch(clearSearch())
     dispatch(search(query))
   }, [])
@@ -25,12 +23,10 @@ const Search = () => {
     try {
       console.log("AAA");
       if(searchResult && error.id != "SEARCH_FAIL") {
-        console.log(searchResult);
         setSubmitted(true)
       }
     } catch(err) {
       setSubmitted(false)
-      console.log("error: ", err);
     }
   }, [searchResult])
 
@@ -41,13 +37,26 @@ const Search = () => {
   return (
     <div className="search-results posts-page">
       <div className="search-page-container">
-        {
-          !isLoading &&
-          submitted &&
-          searchResult["postsRes"].map((res, i) => 
-            <PostSmall key={i} bid={res.bid} title={res.title} tags={res.tags} />
-          )
-        }
+        <div className="search-posts">
+          <h3 className="search-title">Posts: </h3>
+          {
+            !isLoading &&
+            submitted &&
+            searchResult["postsRes"].map((res, i) => 
+              <PostSmall key={i} bid={res.bid} title={res.title} tags={res.tags} />
+            )
+          }
+        </div>
+        <div className="search-users">
+          <h3 className="search-title">Users: </h3>
+          {
+            !isLoading &&
+            submitted &&
+            searchResult["usersRes"].map((res, i) => 
+              <p>{res.name}</p>
+            )
+          }
+        </div>
       </div>
     </div>
   )

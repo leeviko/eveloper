@@ -541,6 +541,11 @@ a {
   margin-right: 10px;
 }
 
+.tag span {
+  color: var(--grey);
+
+}
+
 .post-actions {
   display: flex;
   color: var(--white);
@@ -570,6 +575,10 @@ a {
   justify-content: center;
 }
 
+.search-title {
+  margin-top: 15px;
+}
+
 /* SMALL POST */
 
 .post-small {
@@ -578,3 +587,4 @@ a {
   padding: 15px;
   border-radius: 5px;
 }
+
