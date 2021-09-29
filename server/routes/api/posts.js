@@ -135,7 +135,7 @@ router.get("/:slug/", [
 router.post("/:slug/like", [
   check("bid").escape().trim(),
   check("uid").escape().trim()
-], (req, res) => {
+], auth, (req, res) => {
   const bid = req.params.slug;
   const { uid } = req.body;
 
@@ -191,6 +191,32 @@ router.delete("/:slug/like", auth, (req, res) => {
     })
 
   })
+
+})
+
+/**
+ * @route  GET api/posts/:slug/likes
+ * @desc   Get number of likes
+ * @access Public
+*/
+router.get("/:slug/likes", (req, res) => {
+  const bid = req.params.slug;
+
+  const sql = "SELECT bid from votes_blogs WHERE bid = $1";
+
+  pool.query(sql, (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    const likes = result.rows.length; 
+
+    res.json({
+      likes
+    })
+
+  })
+
 
 })
 

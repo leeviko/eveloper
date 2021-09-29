@@ -42,8 +42,8 @@ const Search = () => {
           {
             !isLoading &&
             submitted &&
-            searchResult["postsRes"].map((res, i) => 
-              <PostSmall key={i} bid={res.bid} title={res.title} tags={res.tags} />
+            searchResult["postsRes"].map((res) => 
+              <PostSmall key={res.bid} bid={res.bid} uid={res.uid} title={res.title} tags={res.tags} date={res.createdat} />
             )
           }
         </div>
@@ -52,8 +52,8 @@ const Search = () => {
           {
             !isLoading &&
             submitted &&
-            searchResult["usersRes"].map((res, i) => 
-              <p>{res.name}</p>
+            searchResult["usersRes"].map((res) => 
+              <p key={res.uid}>{res.name}</p>
             )
           }
         </div>

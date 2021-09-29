@@ -20,15 +20,15 @@ router.get("/users/:slug", [
 
   let usersRes;
 
-  sql = "SELECT uid, email, name FROM users WHERE name LIKE $1";
+  sql = "SELECT uid, email, name FROM users WHERE name LIKE $1 OR uid = $2";
 
-  pool.query(sql, ["%" + searchQuery + "%"], (err, result) => {
+  pool.query(sql, ["%" + searchQuery + "%", searchQuery], (err, result) => {
     if(err) {
       return res.status(400).json([{ msg: err }])
     }
 
     usersRes = result.rows;
-
+    
     res.json({
       usersRes
     });

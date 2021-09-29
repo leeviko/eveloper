@@ -4,7 +4,7 @@ import {
   SEARCH_SUCCESS,
   SEARCH_FAIL,
   CLEAR_SEARCH,
-  SEARCH_LOADING
+  SEARCH_LOADING,
 } from "../actions/types";
 
 

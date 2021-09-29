@@ -9,7 +9,8 @@ import {
   DELETE_POST,
   POSTS_LOADING,
   POST_ERROR,
-  CLEAR_POSTS
+  CLEAR_POSTS,
+  POST_LIKES
 } from "../actions/types";
 
 
@@ -63,6 +64,55 @@ export const getPost = (id) => dispatch => {
         type: POST_ERROR
       })
     })
+}
+
+export const likePost = (bid, uid) => dispatch => {
+  dispatch({ type: POSTS_LOADING });
+  
+  const headers = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  const body = { uid }
+
+  axios.post(`/api/posts/${bid}/like`, body, headers)
+    .then((res) => {
+      dispatch({
+        type: LIKE_POST
+      })
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
+      dispatch({
+        type: POST_ERROR
+      })
+    })
+
+}
+
+export const postLikes = (bid) => dispatch => {
+
+  const headers = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  axios.get(`api/posts/${bid}/likes`, headers)
+    .then((res) => {
+      dispatch({
+        type: POST_LIKES
+      })
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
+      dispatch({
+        type: POST_ERROR
+      })
+    })
+
 }
 
 export const clearPosts = () => {

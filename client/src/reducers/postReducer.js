@@ -6,7 +6,8 @@ import {
   DELETE_POST,
   POSTS_LOADING,
   POST_ERROR,
-  CLEAR_POSTS
+  CLEAR_POSTS,
+  POST_LIKES
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +34,17 @@ export default (state = initialState, action) => {
         isLoading: false,
         post: action.payload,
       };
+    case LIKE_POST: 
+      return {
+        ...state,
+        isLoading: false
+      };
+    case POST_LIKES:
+      return {
+        ...state,
+        isLoading: false,
+        post: [...{likes: action.payload}]
+      }
     case CLEAR_POSTS:
     case POST_ERROR:
       return {

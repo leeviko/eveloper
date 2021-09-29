@@ -547,12 +547,17 @@ a {
 }
 
 .post-actions {
+  font-size: 0.85rem;
+  margin-top: 10px;
   display: flex;
-  color: var(--white);
 }
 
 .post-action {
+  font-family: inherit;
+  border: none;
+  background: none;
   margin-right: 20px;
+  color: var(--white);
 }
 
 .post-action > img,
@@ -561,6 +566,8 @@ a {
 }
 
 .post-actions img {
+  margin-right: 5px;
+
   filter: var(--white-filter);
 }
 
@@ -584,7 +591,20 @@ a {
 .post-small {
   margin: 15px 0;
   background-color: var(--blue-post);
-  padding: 15px;
+  padding: 20px;
+  width: 500px;
   border-radius: 5px;
 }
 
+.post-small .post-info {
+  line-height: 1;
+}
+
+.post-created {
+  font-size: 0.8rem;
+  color: var(--grey);
+}
+
+.post-small .editor-tags {
+  padding: 0;
+}
