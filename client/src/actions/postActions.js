@@ -92,28 +92,29 @@ export const likePost = (bid, uid) => dispatch => {
 
 }
 
-export const postLikes = (bid) => dispatch => {
+// export const postLikes = (bid) => dispatch => {
 
-  const headers = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }
+//   const headers = {
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   }
 
-  axios.get(`api/posts/${bid}/likes`, headers)
-    .then((res) => {
-      dispatch({
-        type: POST_LIKES
-      })
-    })
-    .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
-      dispatch({
-        type: POST_ERROR
-      })
-    })
+//   axios.get(`/api/posts/${bid}/likes`, headers)
+//     .then((res) => {
+//       dispatch({
+//         type: POST_LIKES,
+//         payload: res.data
+//       })
+//     })
+//     .catch((err) => {
+//       dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
+//       dispatch({
+//         type: POST_ERROR
+//       })
+//     })
 
-}
+// }
 
 export const clearPosts = () => {
   return {

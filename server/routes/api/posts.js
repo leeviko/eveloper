@@ -204,13 +204,13 @@ router.get("/:slug/likes", (req, res) => {
 
   const sql = "SELECT bid from votes_blogs WHERE bid = $1";
 
-  pool.query(sql, (err, result) => {
+  pool.query(sql, [bid], (err, result) => {
     if(err) {
       return res.status(400).json([{ msg: err }])
     }
-
+    console.log(bid);
     const likes = result.rows.length; 
-
+    console.log(result);
     res.json({
       likes
     })

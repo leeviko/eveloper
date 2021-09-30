@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-import { UserActions } from './PostBody';
+import { useDispatch } from 'react-redux';
 
 import Tag from "./Tag";
 
+import LikeImg from "../../../images/like.svg";
+import ChatImg from "../../../images/chat.svg";
+
 const PostSmall = ({ bid, uid, title, tags, date }) => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(null);
+  const [likeCount, setLikeCount] = useState("");
   const [formatDate, setFormatDate] = useState("");
   const [user, setUser] = useState(null);
 
@@ -20,7 +25,8 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
     const newdate = day + "." + month + "." + year;
 
     setFormatDate(newdate)
-    getAuthor()
+    getAuthor() 
+    getLikes()
   }, [])
 
   const getAuthor = () => {
@@ -43,6 +49,26 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
       })
   }
 
+  const getLikes = () => {
+    setLoading(true);
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  
+    axios.get(`/api/posts/${bid}/likes`, headers)
+      .then((res) => {
+        setLikeCount(res.data.likes)
+        setLoading(false)
+        return console.log(res.data);
+      })
+      .catch((err) => {
+        setLoading(false)
+        return console.log(err);
+      })
+  }
 
   return (
     <div className="post-small">
@@ -63,7 +89,14 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
         }
       </div>
       <div className="post-actions">
-        <UserActions />
+        <button className="post-action">
+          <img src={LikeImg} />
+          <span>{likeCount} Likes</span>
+        </button>
+        <button className="post-action">
+          <img src={ChatImg} />
+          <span>0 Comments</span>
+        </button>
       </div>
     </div>
   )
