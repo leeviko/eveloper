@@ -7,21 +7,22 @@ const useGetAuthor = (uid) => {
 
   useEffect(() => {
     const headers = {
-        headers: {
-            "Content-Type": "application/json"
-          }
-        }
+      headers: {
+          "Content-Type": "application/json"
+      }
+    }
         
-        axios.get(`/api/search/users/${uid}`, headers)
-        .then((res) => {
-          setUser(res.data.usersRes[0])
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+    axios.get(`/api/search/users/${uid}`, headers)
+    .then((res) => {
+      setUser(res.data.usersRes[0])
+    })
+    .catch((err) => {
+      console.log(err);
+    })
         
-      }, [])
-      return user;
+  }, [])
+  
+  return user;
 }
 
 export default useGetAuthor;
