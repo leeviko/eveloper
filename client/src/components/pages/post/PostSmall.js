@@ -3,8 +3,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 import useGetAuthor from '../../../hooks/useGetAuthor';
-import useGetLikes from '../../../hooks/useGetLikes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { UserActions } from "./PostBody";
 
@@ -13,14 +12,14 @@ import Tag from "./Tag";
 import LikeImg from "../../../images/like.svg";
 import ChatImg from "../../../images/chat.svg";
 
-const PostSmall = ({ bid, uid, title, tags, date }) => {
+const PostSmall = ({ bid, author_id, title, tags, date }) => {
+  const user = useSelector(state => state.auth);
   const dispatch = useDispatch();
-  const user = useGetAuthor(uid)
-  const postLikes = useGetLikes(bid)
+  const author = useGetAuthor(author_id)
   const [formatDate, setFormatDate] = useState("");
-
+  const [uid, setUid] = useState(null)
+  
   useEffect(() => {
-    console.log(user);
     const dateObj = new Date(date);
     const month = dateObj.getMonth() + 1;
     const day = dateObj.getDate();
@@ -30,6 +29,10 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
 
     setFormatDate(newdate)
     
+    if(user.isAuthenticated) {
+      setUid(user.user.uid)
+    }
+
     // getLikes()
   }, [])
 
@@ -80,7 +83,7 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
       <div className="post-info">
         <p>
           {
-            user === null ? "Loading..." : user.name
+            author === null ? "Loading..." : author.name
           }
         </p>
         <span className="post-created">{formatDate}</span>

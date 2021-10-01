@@ -42,7 +42,7 @@ const Search = () => {
             !isLoading &&
             submitted &&
             searchResult["postsRes"].map((res) => 
-              <PostSmall key={res.bid} bid={res.bid} uid={res.uid} title={res.title} tags={res.tags} date={res.createdat} />
+              <PostSmall key={res.bid} bid={res.bid} author_id={res.uid} title={res.title} tags={res.tags} date={res.createdat} />
             )
           }
         </div>

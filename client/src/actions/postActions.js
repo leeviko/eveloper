@@ -79,15 +79,18 @@ export const likePost = (bid, uid) => dispatch => {
 
   axios.post(`/api/posts/${bid}/like`, body, headers)
     .then((res) => {
-      dispatch({
-        type: LIKE_POST
-      })
+      console.log(res.data);
+      // dispatch({
+      //   type: LIKE_POST,
+      //   payload: res.data
+      // })
     })
     .catch((err) => {
-      dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
-      dispatch({
-        type: POST_ERROR
-      })
+      console.log(err);
+      // dispatch(returnErrors(err.response.data, err.response.status, "POST_ERROR"));
+      // dispatch({
+      //   type: POST_ERROR
+      // })
     })
 
 }

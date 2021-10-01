@@ -1,8 +1,25 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useGetLikes = (bid) => {
+const useLike = (bid, uid) => {
   const [likeCount, setLikeCount] = useState(null);
+
+  const likePost = () => {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  
+    axios.post(`/api/posts/${bid}/like`, { uid }, headers)
+      .then((res) => {
+        setLikeCount(res.data.likes)
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      })
+    return likeCount
+  }
 
   const getLikes = () => {
     const headers = {
@@ -18,19 +35,19 @@ const useGetLikes = (bid) => {
       .catch((err) => {
         console.log("err: ", err);
       })
+
     return likeCount
   }
 
   useEffect(() => {
-    console.log("sdf");
     getLikes()
   }, [])
 
 
   return [likeCount, () => {
-    getLikes()
+    likePost()
   }]
 
 }
 
-export default useGetLikes;
+export default useLike;

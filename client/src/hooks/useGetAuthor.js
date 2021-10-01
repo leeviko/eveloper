@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useGetAuthor = (uid) => {
-  const [user, setUser] = useState(null);
+const useGetAuthor = (author_id) => {
+  const [author, setAuthor] = useState(null);
 
   useEffect(() => {
     const headers = {
@@ -10,10 +10,10 @@ const useGetAuthor = (uid) => {
         "Content-Type": "application/json"
       }
     }
-        
-    axios.get(`/api/search/users/${uid}`, headers)
+
+    axios.get(`/api/search/users/${author_id}`, headers)
     .then((res) => {
-      setUser(res.data.usersRes[0])
+      setAuthor(res.data.usersRes[0])
     })
     .catch((err) => {
       console.log(err);
@@ -21,7 +21,7 @@ const useGetAuthor = (uid) => {
         
   }, [])
 
-  return user;
+  return author;
 }
 
 export default useGetAuthor;

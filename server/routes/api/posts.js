@@ -177,7 +177,7 @@ router.post("/:slug/like", [
           const likes = result.rows.length; 
           
           res.json({
-            likes,
+            likes
           })
       
         })

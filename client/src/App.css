@@ -567,8 +567,15 @@ a {
 
 .post-actions img {
   margin-right: 5px;
-
   filter: var(--white-filter);
+}
+
+.post-action.like img {
+  cursor: pointer;
+}
+
+.post-action.comment {
+  cursor: pointer;
 }
 
 .post-sidebar {

@@ -39,12 +39,6 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false
       };
-    case POST_LIKES:
-      return {
-        ...state,
-        isLoading: false,
-        post: [...{likes: action.payload}]
-      }
     case CLEAR_POSTS:
     case POST_ERROR:
       return {
