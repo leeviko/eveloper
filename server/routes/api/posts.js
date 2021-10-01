@@ -139,7 +139,7 @@ router.post("/:slug/like", [
   const bid = req.params.slug;
   const { uid } = req.body;
 
-  let sql = "SELECT bid, uid FROM votes_blogs WHERE bid = $1 AND uid = $2";
+  let sql = "SELECT bid, uid FROM post_likes WHERE bid = $1 AND uid = $2";
 
   pool.query(sql, [bid, uid], (err, result) => {
     if(err) {
@@ -157,7 +157,7 @@ router.post("/:slug/like", [
     
       const query = {
         name: "like-post",
-        text: "INSERT INTO votes_blogs VALUES ($1, $2, $3)",
+        text: "INSERT INTO post_likes VALUES ($1, $2, $3)",
         values: [newVote.vote_id, newVote.uid, newVote.bid]
       }
     
@@ -167,7 +167,7 @@ router.post("/:slug/like", [
         }
         
         // Get new like count
-        sql = "SELECT bid from votes_blogs WHERE bid = $1";
+        sql = "SELECT bid from post_likes WHERE bid = $1";
 
         pool.query(sql, [bid], (err, result) => {
           if(err) {
@@ -185,7 +185,7 @@ router.post("/:slug/like", [
       })
     } else {
       
-      sql = "DELETE FROM votes_blogs WHERE bid = $1 AND uid = $2";
+      sql = "DELETE FROM post_likes WHERE bid = $1 AND uid = $2";
 
       pool.query(sql, [bid, uid], (err, result) => {
         if(err) {
@@ -193,7 +193,7 @@ router.post("/:slug/like", [
         }
 
         // Get new like count
-        sql = "SELECT bid from votes_blogs WHERE bid = $1";
+        sql = "SELECT bid from post_likes WHERE bid = $1";
 
         pool.query(sql, [bid], (err, result) => {
           if(err) {
@@ -223,7 +223,7 @@ router.post("/:slug/like", [
 router.get("/:slug/likes", (req, res) => {
   const bid = req.params.slug;
 
-  const sql = "SELECT bid from votes_blogs WHERE bid = $1";
+  const sql = "SELECT bid from post_likes WHERE bid = $1";
 
   pool.query(sql, [bid], (err, result) => {
     if(err) {
