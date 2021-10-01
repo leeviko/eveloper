@@ -26,3 +26,10 @@ CREATE TABLE IF NOT EXISTS favorited_blogs (
   uid varchar(255) REFERENCES users,
   bid VARCHAR(255) REFERENCES posts
 );
+
+CREATE TABLE IF NOT EXISTS post_comments (
+  comment_id varchar(255) primary key,
+  uid varchar(255) REFERENCES users,
+  bid varchar(255) REFERENCES posts,
+  comment varchar(255) not null
+);
