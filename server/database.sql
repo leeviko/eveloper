@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS posts (
   tags text[],
 );
 
-CREATE TABLE IF NOT EXISTS votes_blogs (
+CREATE TABLE IF NOT EXISTS post_likes (
   vote_id varchar(255) NOT NULL PRIMARY KEY,
   uid varchar(255) REFERENCES users,
   bid VARCHAR(255) REFERENCES posts
