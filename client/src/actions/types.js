@@ -20,6 +20,8 @@ export const POST_ERROR = "POST_ERROR";
 export const CLEAR_POSTS = "CLEAR_POSTS";
 export const POST_LIKES = "POST_LIKES";
 
+export const LIKE_ERROR = "LIKE_ERROR";
+
 export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
 export const SEARCH_FAIL = "SEARCH_FAIL"
 export const CLEAR_SEARCH = "CLEAR_SEARCH";

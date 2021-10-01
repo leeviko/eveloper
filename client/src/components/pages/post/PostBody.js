@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors } from '../../../actions/errorActions';
 
 import useLike from '../../../hooks/useLike';
 
@@ -14,7 +15,7 @@ import Tag from "./Tag";
 import LikeImg from "../../../images/like.svg";
 import LikedImg from "../../../images/liked.svg";
 import ChatImg from "../../../images/chat.svg";
-import { likePost } from '../../../actions/postActions';
+import { Redirect } from 'react-router';
 
 const PostBody = ({ post }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
@@ -80,7 +81,13 @@ const PostBody = ({ post }) => {
 }
 
 export const UserActions = ({bid, uid}) => {
+  const dispatch = useDispatch();
+  const error = useSelector(state => state.error)
   const [likesCount, like] = useLike(bid, uid);
+
+  useEffect(() => {
+    dispatch(clearErrors())
+  }, [])
 
   const handleClick = () => {
     like()
@@ -88,6 +95,7 @@ export const UserActions = ({bid, uid}) => {
 
   return (
     <>
+      { error.id === "LIKE_ERROR" && <Redirect to="/register" /> }
       <button className="post-action like" onClick={() => handleClick()}>
         <img src={LikeImg} />
         <span> { likesCount === null ? "Loading..." : likesCount + " Likes" }</span>

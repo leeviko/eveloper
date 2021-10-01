@@ -6,8 +6,8 @@
 - [x] Registration and authentication
 - [x] Create a post
 - [x] Search for users and posts
-- [ ] Like post
-- [ ] Favorite post
+- [x] Like post
+- [ ] Comment post
 - [ ] Edit post
 - [ ] Search for posts by tag, user or popularity
 - [ ] Follow user
