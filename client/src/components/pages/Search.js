@@ -21,7 +21,6 @@ const Search = () => {
 
   useEffect(() => {
     try {
-      console.log("AAA");
       if(searchResult && error.id != "SEARCH_FAIL") {
         setSubmitted(true)
       }

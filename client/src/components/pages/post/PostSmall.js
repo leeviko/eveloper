@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
+import useGetAuthor from '../../../hooks/useGetAuthor';
 import { useDispatch } from 'react-redux';
 
 import Tag from "./Tag";
@@ -11,12 +12,12 @@ import ChatImg from "../../../images/chat.svg";
 
 const PostSmall = ({ bid, uid, title, tags, date }) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(null);
+  const user = useGetAuthor(uid)
   const [likeCount, setLikeCount] = useState("");
   const [formatDate, setFormatDate] = useState("");
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    console.log(user);
     const dateObj = new Date(date);
     const month = dateObj.getMonth() + 1;
     const day = dateObj.getDate();
@@ -25,50 +26,53 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
     const newdate = day + "." + month + "." + year;
 
     setFormatDate(newdate)
-    getAuthor() 
-    getLikes()
+    
+    // getLikes()
   }, [])
 
-  const getAuthor = () => {
-    setLoading(true)
-    const headers = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
+  useEffect(() => {
+  }, [user])
 
-    axios.get(`/api/search/users/${uid}`, headers)
-      .then((res) => {
-        setUser(res.data.usersRes[0])
-        setLoading(false)
-        return console.log(user);
-      })
-      .catch((err) => {
-        setLoading(false)
-        return console.log(err);
-      })
-  }
+  // const getAuthor = () => {
+  //   setLoading(true)
+  //   const headers = {
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   }
 
-  const getLikes = () => {
-    setLoading(true);
+  //   axios.get(`/api/search/users/${uid}`, headers)
+  //     .then((res) => {
+  //       setUser(res.data.usersRes[0])
+  //       setLoading(false)
+  //       return console.log(user);
+  //     })
+  //     .catch((err) => {
+  //       setLoading(false)
+  //       return console.log(err);
+  //     })
+  // }
 
-    const headers = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
+  // const getLikes = () => {
+  //   setLoading(true);
+
+  //   const headers = {
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   }
   
-    axios.get(`/api/posts/${bid}/likes`, headers)
-      .then((res) => {
-        setLikeCount(res.data.likes)
-        setLoading(false)
-        return console.log(res.data);
-      })
-      .catch((err) => {
-        setLoading(false)
-        return console.log(err);
-      })
-  }
+  //   axios.get(`/api/posts/${bid}/likes`, headers)
+  //     .then((res) => {
+  //       setLikeCount(res.data.likes)
+  //       setLoading(false)
+  //       return console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       setLoading(false)
+  //       return console.log(err);
+  //     })
+  // }
 
   return (
     <div className="post-small">
@@ -97,7 +101,7 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
           <img src={ChatImg} />
           <span>0 Comments</span>
         </button>
-      </div>
+      </div>  
     </div>
   )
 }
