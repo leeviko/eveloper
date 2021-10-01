@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useGetAuthor = (uid) => {
-  const [loading, setLoading] = useState(null);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const headers = {
       headers: {
-          "Content-Type": "application/json"
+        "Content-Type": "application/json"
       }
     }
         
@@ -21,7 +20,7 @@ const useGetAuthor = (uid) => {
     })
         
   }, [])
-  
+
   return user;
 }
 
