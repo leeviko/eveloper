@@ -129,7 +129,7 @@ router.get("/:slug/", [
 
 /**
  * @route  POST api/posts/:slug/like
- * @desc   Like a post
+ * @desc   Like/unlike a post
  * @access Private
 */
 router.post("/:slug/like", [
@@ -139,57 +139,55 @@ router.post("/:slug/like", [
   const bid = req.params.slug;
   const { uid } = req.body;
 
-  const vote_id = uuidv4();
+  let sql = "SELECT bid, uid FROM votes_blogs WHERE bid = $1 AND uid = $2";
 
-  const newVote = {
-    vote_id,
-    uid,
-    bid
-  }
-
-  const query = {
-    name: "like-post",
-    text: "INSERT INTO votes_blogs VALUES ($1, $2, $3)",
-    values: [newVote.vote_id, newVote.uid, newVote.bid]
-  }
-
-  pool.query(query, (err, result) => {
+  pool.query(sql, [bid, uid], (err, result) => {
     if(err) {
       return res.status(400).json([{ msg: err }])
     }
+    console.log(result.rows);
+    console.log(uid);
+    console.log(bid);
+    console.log(result.rows.length);
+    if(result.rows == 0) {
+      const vote_id = uuidv4();
+    
+      const newVote = {
+        vote_id,
+        uid,
+        bid
+      }
+    
+      const query = {
+        name: "like-post",
+        text: "INSERT INTO votes_blogs VALUES ($1, $2, $3)",
+        values: [newVote.vote_id, newVote.uid, newVote.bid]
+      }
+    
+      pool.query(query, (err, result) => {
+        if(err) {
+          return res.status(400).json([{ msg: err }])
+        }
+    
+        res.json({
+          newVote
+        })
+    
+      })
+    } else {
+      
+      sql = "DELETE FROM votes_blogs WHERE bid = $1 AND uid = $2";
 
-    res.json({
-      newVote
-    })
+      pool.query(sql, [bid, uid], (err, result) => {
+        if(err) {
+          return res.status(400).json([{ msg: err }])
+        }
 
-  })
+        res.json([{ msg: "Post unliked" }])
+        
+      })
 
-})
-
-/**
- * @route  DELETE api/posts/like
- * @desc   unlike a post
- * @access Private
-*/
-router.delete("/:slug/like", auth, (req, res) => {
-  const bid = req.params.slug;
-  const { uid } = req.body;
-
-  const query = {
-    name: "unlike-post",
-    text: "DELETE FROM votes_blogs WHERE bid = $1 AND uid = $2",
-    values: [bid, uid]
-  }
-
-  pool.query(query, (err, result) => {
-    if(err) {
-      return res.status(400).json([{ msg: err }])
     }
-
-    res.json({
-      msg: "Blog unliked"
-    })
-
   })
 
 })
@@ -208,15 +206,13 @@ router.get("/:slug/likes", (req, res) => {
     if(err) {
       return res.status(400).json([{ msg: err }])
     }
-    console.log(bid);
     const likes = result.rows.length; 
-    console.log(result);
+    
     res.json({
       likes
     })
 
   })
-
 
 })
 
