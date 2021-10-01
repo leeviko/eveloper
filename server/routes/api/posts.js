@@ -145,10 +145,7 @@ router.post("/:slug/like", [
     if(err) {
       return res.status(400).json([{ msg: err }])
     }
-    console.log(result.rows);
-    console.log(uid);
-    console.log(bid);
-    console.log(result.rows.length);
+
     if(result.rows == 0) {
       const vote_id = uuidv4();
     
@@ -168,9 +165,21 @@ router.post("/:slug/like", [
         if(err) {
           return res.status(400).json([{ msg: err }])
         }
-    
-        res.json({
-          newVote
+        
+        // Get new like count
+        sql = "SELECT bid from votes_blogs WHERE bid = $1";
+
+        pool.query(sql, [bid], (err, result) => {
+          if(err) {
+            return res.status(400).json([{ msg: err }])
+          }
+          
+          const likes = result.rows.length; 
+          
+          res.json({
+            likes,
+          })
+      
         })
     
       })
@@ -183,7 +192,21 @@ router.post("/:slug/like", [
           return res.status(400).json([{ msg: err }])
         }
 
-        res.json([{ msg: "Post unliked" }])
+        // Get new like count
+        sql = "SELECT bid from votes_blogs WHERE bid = $1";
+
+        pool.query(sql, [bid], (err, result) => {
+          if(err) {
+            return res.status(400).json([{ msg: err }])
+          }
+          
+          const likes = result.rows.length; 
+          
+          res.json({
+            likes,
+          })
+      
+        })
         
       })
 
