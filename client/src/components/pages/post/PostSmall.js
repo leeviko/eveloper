@@ -3,7 +3,10 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 import useGetAuthor from '../../../hooks/useGetAuthor';
+import useGetLikes from '../../../hooks/useGetLikes';
 import { useDispatch } from 'react-redux';
+
+import { UserActions } from "./PostBody";
 
 import Tag from "./Tag";
 
@@ -13,7 +16,7 @@ import ChatImg from "../../../images/chat.svg";
 const PostSmall = ({ bid, uid, title, tags, date }) => {
   const dispatch = useDispatch();
   const user = useGetAuthor(uid)
-  const [likeCount, setLikeCount] = useState("");
+  const postLikes = useGetLikes(bid)
   const [formatDate, setFormatDate] = useState("");
 
   useEffect(() => {
@@ -30,8 +33,6 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
     // getLikes()
   }, [])
 
-  useEffect(() => {
-  }, [user])
 
   // const getAuthor = () => {
   //   setLoading(true)
@@ -79,7 +80,7 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
       <div className="post-info">
         <p>
           {
-            user === null ? null : user.name
+            user === null ? "Loading..." : user.name
           }
         </p>
         <span className="post-created">{formatDate}</span>
@@ -93,14 +94,15 @@ const PostSmall = ({ bid, uid, title, tags, date }) => {
         }
       </div>
       <div className="post-actions">
-        <button className="post-action">
+        <UserActions bid={bid} uid={uid} />
+        {/* <button className="post-action">
           <img src={LikeImg} />
-          <span>{likeCount} Likes</span>
+          <span>{postLikes === null ? "Loading..." : postLikes} Likes</span>
         </button>
         <button className="post-action">
           <img src={ChatImg} />
           <span>0 Comments</span>
-        </button>
+        </button> */}
       </div>  
     </div>
   )

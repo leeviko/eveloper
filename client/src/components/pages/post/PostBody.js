@@ -7,6 +7,8 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import useGetLikes from '../../../hooks/useGetLikes';
+
 import Tag from "./Tag";
 
 import LikeImg from "../../../images/like.svg";
@@ -24,6 +26,8 @@ const PostBody = ({ post }) => {
       setUid(user.uid)
     }
   }, [])
+
+
   // const uid = useSelector(state => state.auth.user.uid)
 
   return (
@@ -66,7 +70,7 @@ const PostBody = ({ post }) => {
               }} 
             />
             <div className="post-actions">
-              <UserActions bid={post.bid} uid={uid} /> 
+              <UserActions bid={post.bid} uid={uid} post={post} /> 
             </div>
           </div>
         </div>
@@ -75,18 +79,24 @@ const PostBody = ({ post }) => {
   )
 }
 
-export const UserActions = ({bid, uid}) => {
+export const UserActions = ({bid, uid, post}) => {
   const dispatch = useDispatch();
+  const [likesCount, update] = useGetLikes(bid);
+
+  const handleClick = () => {
+    dispatch(likePost(bid, uid))
+    update()
+  }
 
   return (
     <>
-      <button className="post-action" onClick={() => dispatch(likePost(bid,uid))}>
+      <button className="post-action" onClick={() => handleClick()}>
         <img src={LikeImg} />
-        <span>Likes</span>
+        <span> { likesCount === null ? "Loading..." : likesCount } Likes</span>
       </button>
       <button className="post-action">
         <img src={ChatImg} />
-        <span>Comments</span>
+        <span>0 Comments</span>
       </button>
     </>
   )
