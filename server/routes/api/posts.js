@@ -111,7 +111,6 @@ router.get("/:slug/", [
     text: "SELECT * FROM posts WHERE bid = $1",
     values: [bid],
   }
-
   pool.query(query, (err, result) => {
     if(err) {
       return res.status(400).json([{ msg: err }])
@@ -124,7 +123,6 @@ router.get("/:slug/", [
     })
 
   })
-
 })
 
 /**
@@ -233,6 +231,99 @@ router.get("/:slug/likes", (req, res) => {
     
     res.json({
       likes
+    })
+
+  })
+
+})
+
+/**
+ * @route  GET api/posts/:slug/comments
+ * @desc   Get post comments
+ * @access Public
+*/
+router.get("/:slug/comments", [
+  check("bid").escape().trim()
+], (req, res) => {
+  const bid = req.params.slug;
+
+  let sql = "SELECT comment_id, bid, comment, createdat from post_comments WHERE bid = $1";
+
+  pool.query(sql, [bid], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    const comments = result.rows;
+
+    res.json({
+      comments
+    })
+
+  })
+
+})
+
+/**
+ * @route  POST api/posts/:slug/comments
+ * @desc   Create new comment
+ * @access Private
+*/
+router.post("/:slug/comment", [
+  check("bid").escape().trim(),
+  check("uid").escape().trim(),
+  check("comment")
+], auth, (req, res) => {
+  const bid = req.params.slug;
+  const { uid, comment } = req.body;
+
+  let sql = "SELECT bid from posts WHERE bid = $1";
+
+  const newComment = {
+    comment_id: uuidv4(),
+    uid,
+    bid,
+    comment,
+    user: ""  
+  }
+
+  // Check if post exist
+  pool.query(sql, [bid], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }]);
+    }
+
+    if(!result.rows) {
+      return res.status(400).json([{ msg: "Post doesnt exist..." }])
+    }
+
+  })
+
+  sql = "SELECT uid, name FROM users WHERE uid = $1";
+
+  pool.query(sql, [uid], (err, result) => {
+    if(err)  {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    newComment.user = result.rows[0].name;
+  })
+
+  const query = {
+    name: "create-comment",
+    text: "INSERT INTO post_comments (comment_id, uid, bid, comment) VALUES ($1, $2, $3, $4)",
+    values: [newComment.comment_id, newComment.uid, newComment.bid, newComment.comment]
+  }
+
+  pool.query(query, (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+
+
+    res.json({
+      newComment
     })
 
   })

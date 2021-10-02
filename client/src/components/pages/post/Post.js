@@ -39,7 +39,7 @@ const Post = () => {
     <div className="post post-wrapper">
       { renderPost && 
         <>
-          <PostBody post={post.post} />
+          <PostBody post={post.post} comments={post.comments.comments} />
           <PostSidebar />
         </>
       }

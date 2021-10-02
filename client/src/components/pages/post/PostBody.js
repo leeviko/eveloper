@@ -11,13 +11,14 @@ import { clearErrors } from '../../../actions/errorActions';
 import useLike from '../../../hooks/useLike';
 
 import Tag from "./Tag";
+import Comment from "./Comment";
 
 import LikeImg from "../../../images/like.svg";
 import LikedImg from "../../../images/liked.svg";
 import ChatImg from "../../../images/chat.svg";
 import { Redirect } from 'react-router';
 
-const PostBody = ({ post }) => {
+const PostBody = ({ post, comments }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const user = useSelector(state => state.auth.user)
   const [uid, setUid] = useState("");
@@ -71,16 +72,23 @@ const PostBody = ({ post }) => {
               }} 
             />
             <div className="post-actions">
-              <UserActions bid={post.bid} uid={uid} /> 
+              <UserActions bid={post.bid} uid={uid} commentCount={comments.length} /> 
             </div>
           </div>
+            <div className="post-comments">
+              {
+                comments.map((comment) => (
+                  <Comment key={comment.comment_id} user={comment.user} comment={comment.comment} date={comment.createdat}   />
+                ))
+              }
+            </div>
         </div>
       </div>
     </>
   )
 }
 
-export const UserActions = ({bid, uid}) => {
+export const UserActions = ({ bid, uid, commentCount }) => {
   const dispatch = useDispatch();
   const error = useSelector(state => state.error)
   const [likesCount, like] = useLike(bid, uid);
@@ -102,10 +110,10 @@ export const UserActions = ({bid, uid}) => {
       </button>
       <button className="post-action comment">
         <img src={ChatImg} />
-        <span>0 Comments</span>
+        <span>{ commentCount === null ? "Loading..." : commentCount + " Comments" }</span>
       </button>
     </>
-  )
+  );
 }
 
 export default PostBody
