@@ -20,7 +20,7 @@ router.get("/users/:slug", [
 
   let usersRes;
 
-  sql = "SELECT uid, email, name, createdat FROM users WHERE name LIKE $1 OR uid = $2";
+  sql = "SELECT uid, email, name, createdat, description FROM users WHERE name LIKE $1 OR uid = $2";
 
   pool.query(sql, ["%" + searchQuery + "%", searchQuery], (err, result) => {
     if(err) {

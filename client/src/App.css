@@ -8,6 +8,8 @@
   --accent-hover: #297cbb;
   --accent-transparent: hsla(206, 96%, 59%, 0.15);
 
+
+
   --dark-blue: #061927;
   --light-blue: #0e3757;
   --blue: #0C2F49;
@@ -116,6 +118,16 @@ a {
   border: 2px solid var(--accent);
   border-radius: 5px;
   transition: 0.2s
+}
+
+.btn:disabled {
+  background-color: var(--accent-transparent);
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.btn:disabled:hover {
+  background-color: var(--accent-transparent);
 }
 
 .btn:hover, .btn-outline:hover {
@@ -601,10 +613,10 @@ a {
 
 /* POST SIDEBAR */
 .post-sidebar {
+  background-color: var(--blue-post);
   height: fit-content;
   width: 20%;
   color: var(--white);
-  border: 1px solid var(--light-blue);
   padding: 15px;
   border-radius: 5px;
   margin: 0 15px;
@@ -614,6 +626,10 @@ a {
 
 .author-name {
   font-size: 1.2rem;
+}
+
+.author-desc {
+  font-size: 0.9rem;
 }
 
 .author-follow {
