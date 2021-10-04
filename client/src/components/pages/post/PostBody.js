@@ -37,8 +37,11 @@ const PostBody = ({ post, comments }) => {
 
   const handleComment = (e) => {
     e.preventDefault();
-
-    dispatch(newComment(post.bid, uid, values.newComment, user.name))
+    if(!isAuthenticated) {
+      
+    } else {
+      dispatch(newComment(post.bid, uid, values.newComment, user.name))
+    }
   }
 
   // const uid = useSelector(state => state.auth.user.uid)
