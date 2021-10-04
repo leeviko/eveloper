@@ -12,7 +12,7 @@
   --light-blue: #0e3757;
   --blue: #0C2F49;
   --blue-transp: hsla(206, 96%, 59%, 0.15);
-  --blue-post: hsl(206, 72%, 17%);
+  --blue-post: #0c304b;
   --blue-post-transp: hsla(206, 96%, 59%, 0.05);
 
 
@@ -472,17 +472,31 @@ a {
   background-color: var(--blue-post);
   display: flex;
   flex-direction: column;
-  padding: 15px 15px 0 15px;
   min-height: 93px;
+}
+
+.post-editor .post-upper{
+  padding: 15px 15px 0 15px;
+}
+
+.post-wrapper .post-upper{
+  padding: 15px 15px 0 0;
+}
+
+.post-editor .post-title, .editor-tags{
+  padding: 0 15px;
 }
 
 .post-fields .post-upper {
   padding: 15px;
 }
 
+.post-wrapper .editor-tags {
+  padding: 0;
+}
+
 .post-upper .post-title, .editor-tags {
   outline: none;
-  padding: 0px 15px;
   font-family: inherit;
   color: var(--white);
   border: none;
@@ -493,9 +507,16 @@ a {
   font-size: 2.5rem;
 }
 
-.post-content {
+.post-editor .post-content {
   background-color: var(--blue-post);
-  border-radius: 0 0 5px 5px;
+  border-radius:  0 0 5px 5px;
+  padding: 5px 15px 15px 30px;
+  color: var(--white);
+}
+
+.post-wrapper .post-body {
+  background-color: var(--blue-post);
+  border-radius: 5px;
   padding: 5px 15px 15px 30px;
   color: var(--white);
 }
@@ -614,4 +635,68 @@ a {
 
 .post-small .editor-tags {
   padding: 0;
+}
+
+/* COMMENT SECTION */
+
+.post-comments {
+  width: 100%;
+}
+
+.comments-title {
+  font-size: 1.5rem;
+  margin: 15px 0;
+}
+
+.post-comments-container {
+  padding: 0 50px;
+}
+
+.post-comments .new-comment {
+  margin: 10px 0;
+}
+
+.post-comments .new-comment textarea {
+  border-radius: 3px;
+  color: var(--white);
+  font-family: inherit;
+  padding: 5px;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 125px;
+  min-height: 125px;
+  border: 1px solid var(--blue-transp);
+  background-color: var(--blue-post-transp);
+  transition: 0.2s;
+  resize: none;
+}
+
+.post-comments .new-comment textarea:focus {
+  background-color: var(--dark-blue);
+}
+
+.comment-btn {
+  margin: 5px 0;
+}
+
+.post-comment {
+  padding: 15px;
+  border: 1px solid var(--blue-transp);
+  border-radius: 3px;
+  margin: 10px 0;
+}
+
+.comment-top {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.comment-top p {
+  margin-right: 5px;
+  font-size: 1.2rem;
+}
+
+.comment-top span {
+  color: var(--grey);
 }

@@ -22,9 +22,10 @@ export const POST_LIKES = "POST_LIKES";
 
 export const LIKE_ERROR = "LIKE_ERROR";
 
-export const COMMENT_ERROR = "COMMENT_ERROR";
-
 export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
 export const SEARCH_FAIL = "SEARCH_FAIL"
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
 export const SEARCH_LOADING = "SEARCH_LOADING";
+
+export const NEW_COMMENT = "NEW_COMMENT";
+export const COMMENT_ERROR = "COMMENT_ERROR";

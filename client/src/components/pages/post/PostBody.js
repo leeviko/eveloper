@@ -8,7 +8,10 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors } from '../../../actions/errorActions';
 
+import { newComment } from '../../../actions/postActions';
+
 import useLike from '../../../hooks/useLike';
+import useForm from '../../../hooks/useForm';
 
 import Tag from "./Tag";
 import Comment from "./Comment";
@@ -19,16 +22,24 @@ import ChatImg from "../../../images/chat.svg";
 import { Redirect } from 'react-router';
 
 const PostBody = ({ post, comments }) => {
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const user = useSelector(state => state.auth.user)
   const [uid, setUid] = useState("");
+  const [values, handleChange] = useForm({ newComment: "" })
 
   useEffect(() => {
     if(isAuthenticated) {
       setUid(user.uid)
     }
+    console.log(user);
   }, [])
 
+  const handleComment = (e) => {
+    e.preventDefault();
+
+    dispatch(newComment(post.bid, uid, values.newComment, user.name))
+  }
 
   // const uid = useSelector(state => state.auth.user.uid)
 
@@ -75,13 +86,26 @@ const PostBody = ({ post, comments }) => {
               <UserActions bid={post.bid} uid={uid} commentCount={comments.length} /> 
             </div>
           </div>
-            <div className="post-comments">
+          <div className="post-comments">
+            <h1 className="comments-title">Discussion ({comments.length})</h1>
+            <div className="post-comments-container">
+              <form className="new-comment" onSubmit={(e) => handleComment(e)}>
+                <textarea 
+                  name="newComment" 
+                  value={values.newComment} 
+                  onChange={handleChange}
+                  placeholder="Add new comment"
+                >
+                </textarea>
+                <button type="submit" className="comment-btn btn">Submit</button>
+              </form>
               {
                 comments.map((comment) => (
-                  <Comment key={comment.comment_id} user={comment.user} comment={comment.comment} date={comment.createdat}   />
+                  <Comment key={comment.comment_id} name={comment.name} comment={comment.comment} date={comment.createdat}   />
                 ))
               }
             </div>
+          </div>
         </div>
       </div>
     </>
