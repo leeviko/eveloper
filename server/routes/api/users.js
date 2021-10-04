@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const { check, validationResult } = require("express-validator");
 const pool = require("../../config/db");
 const router = express.Router();
-
+const auth = require("../../middleware/auth");
 
 /**
  * @route  POST api/users
@@ -112,6 +112,78 @@ router.get("/:slug", [
     })
 
   })
+
+})
+
+/**
+ * @route  POST api/users/follow
+ * @desc   Follow/unfollow user
+ * @access Private
+*/
+router.post("/follow", [
+  check("uid").escape().trim(),
+  check("followed_id").escape().trim()
+], auth, (req, res) => {
+  const { uid, followed_id } = req.body;
+
+  if(!uid || !followed_id) {
+    return res.status(400).json([{ msg: "Something went wrong:(" }])
+  }
+
+  const newFollow = {
+    follow_id: uuidv4(),
+    follower_id: uid,
+    followed_id
+  }
+
+  // Check if already followed
+  const sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2"
+
+  pool.query(sql, [uid, followed_id], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+    if(result.rowCount >= 1) {
+      const query = {
+        name: "unfollow-user",
+        text: "DELETE FROM user_follows WHERE follower_id = $1 AND followed_id = $2",
+        values: [uid, followed_id],
+      }
+
+      pool.query(query, (err, result) => {
+        if(err) {
+          return res.status(400).json([{ msg: err }])
+        }
+
+        res.json([{
+          msg: "Unfollowed"
+        }])
+
+      })
+
+    } else {
+
+      const query = {
+        name: "follow-user",
+        text: "INSERT INTO user_follows VALUES ($1, $2, $3)",
+        values: [newFollow.follow_id, newFollow.follower_id, newFollow.followed_id],
+      }
+
+      pool.query(query, (err, result) => {
+        if(err) {
+          return res.status(400).json([{ msg: err }])
+        }
+
+        res.json({
+          newFollow
+        })
+
+      })
+
+    }
+
+  })
+
 
 })
 
