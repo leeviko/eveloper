@@ -5,14 +5,16 @@ import { useParams } from 'react-router-dom';
 
 import PostBody from './PostBody';
 import PostSidebar from './PostSidebar';
+import useGetAuthor from '../../../hooks/useGetAuthor';
 
 const Post = () => {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const post = useSelector(state => state.post.post)
   const isLoading = useSelector(state => state.post.isLoading)
   const [renderPost, setRenderPost] = useState(false);
   const { id } = useParams();
-  
+
   useEffect(() => {
     dispatch(getPost(id))
   }, [dispatch])
@@ -40,7 +42,7 @@ const Post = () => {
       { renderPost && 
         <>
           <PostBody post={post.post} comments={post.comments.comments} />
-          <PostSidebar />
+          <PostSidebar post={post.post} />
         </>
       }
     </div>

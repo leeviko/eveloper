@@ -599,8 +599,26 @@ a {
   cursor: pointer;
 }
 
+/* POST SIDEBAR */
 .post-sidebar {
+  height: fit-content;
+  width: 20%;
   color: var(--white);
+  border: 1px solid var(--light-blue);
+  padding: 15px;
+  border-radius: 5px;
+  margin: 0 15px;
+  text-align: center;
+
+}
+
+.author-name {
+  font-size: 1.2rem;
+}
+
+.author-follow {
+  width: 100%;
+  margin: 5px 0;
 }
 
 /* SEARCH RESULT */
@@ -615,7 +633,6 @@ a {
 }
 
 /* SMALL POST */
-
 .post-small {
   margin: 15px 0;
   background-color: var(--blue-post);
@@ -700,3 +717,4 @@ a {
 .comment-top span {
   color: var(--grey);
 }
+

@@ -18,9 +18,9 @@ const useGetAuthor = (author_id) => {
     .catch((err) => {
       console.log(err);
     })
-        
+    
   }, [])
-
+  
   return author;
 }
 

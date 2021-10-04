@@ -32,7 +32,6 @@ const PostBody = ({ post, comments }) => {
     if(isAuthenticated) {
       setUid(user.uid)
     }
-    console.log(user);
   }, [])
 
   const handleComment = (e) => {
