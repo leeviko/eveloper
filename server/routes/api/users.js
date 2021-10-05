@@ -92,28 +92,35 @@ router.post("/", [
 })
 
 /**
- * @route  GET api/users/:slug
- * @desc   Find user
- * @access Public
+ * @route  GET api/users/follow
+ * @desc   Check if followed
+ * @access Private
 */
-router.get("/:slug", [
-  check("searchQuery").trim().escape()
-], (req, res) => {
-  const searchQuery = req.params.slug;
+router.get("/follow", auth, (req, res) => {
+  const { uid, followed_id } = req.body;
 
-  const sql = "SELECT uid, name FROM users WHERE name LIKE $1";
+  sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2";
 
-  pool.query(sql, ["%" + searchQuery + "%"], (err, result) => {
-    if (err) {
-      return res.status(400).json([{ msg: err }]);
+  pool.query(sql, [uid, followed_id], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
     }
-    res.json({
-      result
-    })
+
+    if(result.rowCount >= 1) {
+      res.json({
+        followed: true
+      })
+    } else {
+      res.json({
+        followed: false
+      })
+    }
 
   })
 
+
 })
+
 
 /**
  * @route  POST api/users/follow
@@ -155,9 +162,9 @@ router.post("/follow", [
           return res.status(400).json([{ msg: err }])
         }
 
-        res.json([{
-          msg: "Unfollowed"
-        }])
+        res.json({
+          followed: false
+        })
 
       })
 
@@ -175,7 +182,7 @@ router.post("/follow", [
         }
 
         res.json({
-          newFollow
+          followed: true
         })
 
       })
@@ -183,7 +190,6 @@ router.post("/follow", [
     }
 
   })
-
 
 })
 
