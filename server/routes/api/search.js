@@ -69,9 +69,14 @@ router.get("/posts/:slug", [
 
 })
 
+/**
+ * @route  GET api/search/recentFeed
+ * @desc   Get recent posts
+ * @access Public
+*/
 router.get("/recentFeed", (req, res) => {
   
-  const sql = "SELECT * FROM posts ORDER BY createdat DESC LIMIT 50"
+  const sql = "SELECT * FROM posts ORDER BY createdat LIMIT 50"
 
   pool.query(sql, (err, result) => {
     if(err) {
@@ -82,6 +87,30 @@ router.get("/recentFeed", (req, res) => {
 
     res.json({
       recentResult
+    })
+
+  })
+
+})
+
+/**
+ * @route  GET api/search/topFeed
+ * @desc   Get top posts
+ * @access Public
+*/
+router.get("/topFeed", (req, res) => {
+
+  const sql = "SELECT posts.*, (SELECT COUNT(*) FROM post_likes WHERE post_likes.bid = posts.bid) AS LIKES FROM posts ORDER BY LIKES desc";
+
+  pool.query(sql, (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    topResult = result.rows;
+
+    res.json({
+      topResult
     })
 
   })

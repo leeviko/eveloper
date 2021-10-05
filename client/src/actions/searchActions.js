@@ -6,7 +6,9 @@ import {
   CLEAR_SEARCH,
   SEARCH_LOADING,
   GET_RECENT,
-  RECENT_FAIL
+  RECENT_FAIL,
+  TOP_FAIL,
+  GET_TOP
 } from "../actions/types";
 
 
@@ -58,6 +60,30 @@ export const getRecent = () => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status, "RECENT_FAIL"));
       dispatch({
         type: RECENT_FAIL
+      })
+    })
+}
+
+export const getTop = () => dispatch => {
+  dispatch({ type: SEARCH_LOADING });
+
+  const headers = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  axios.get("/api/search/topFeed", headers)
+    .then((res) => {
+      dispatch({
+        type: GET_TOP,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status, "TOP_FAIL"));
+      dispatch({
+        type: TOP_FAIL
       })
     })
 }

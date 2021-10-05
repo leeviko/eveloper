@@ -34,3 +34,5 @@ export const FOLLOW_ERROR = "FOLLOW_ERROR";
 
 export const RECENT_FAIL = "RECENT_FAIL";
 export const GET_RECENT = "GET_RECENT";
+export const TOP_FAIL = "TOP_FAIL";
+export const GET_TOP = "GET_TOP";

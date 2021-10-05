@@ -4,7 +4,9 @@ import {
   CLEAR_SEARCH,
   SEARCH_LOADING,
   GET_RECENT,
-  RECENT_FAIL
+  RECENT_FAIL,
+  TOP_FAIL,
+  GET_TOP
 } from "../actions/types";
 
 const initialState = {
@@ -16,6 +18,7 @@ export default (state = initialState, action) => {
   switch(action.type) {
     case SEARCH_SUCCESS:
     case GET_RECENT:
+    case GET_TOP:
       return {
         ...state,
         searchResult: action.payload,
@@ -23,6 +26,7 @@ export default (state = initialState, action) => {
       };  
     case SEARCH_FAIL:
     case RECENT_FAIL:
+    case TOP_FAIL:
     case CLEAR_SEARCH:
       return {
         ...state,

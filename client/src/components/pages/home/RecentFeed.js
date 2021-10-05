@@ -17,12 +17,11 @@ const RecentFeed = () => {
     try {
       if(recentRes.recentResult) {
         setRecentResult(recentRes.recentResult)
-        console.log(recentResult);
       } else {
         setRecentResult(null)
       }
     } catch(err) {
-      console.log("LOAINDGk");
+      console.log("error");
     }
   }, [recentRes])
 
