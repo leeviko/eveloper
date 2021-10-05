@@ -13,6 +13,7 @@ const search = require("./routes/api/search");
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 app.use(session({
   name: "sid",
   store: sessionStore,

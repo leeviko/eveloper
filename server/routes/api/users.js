@@ -96,8 +96,16 @@ router.post("/", [
  * @desc   Check if followed
  * @access Private
 */
-router.get("/follow", auth, (req, res) => {
+router.post("/isfollowed",[
+  check("uid").escape().trim(),
+  check("followed_id").escape().trim()
+], auth, (req, res) => {
+
   const { uid, followed_id } = req.body;
+
+  if(!uid || !followed_id) {
+    return res.status(400).json([{ msg: "Something went wrong:(" }])
+  }
 
   sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2";
 

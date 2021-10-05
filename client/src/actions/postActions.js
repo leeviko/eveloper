@@ -57,7 +57,6 @@ export const getPost = (id) => dispatch => {
     axios.get(`/api/posts/${id}/comments`, headers), 
   ])
   .then(axios.spread((postRes, commentsRes) => {
-    console.log({ post: postRes.data.post, comments: commentsRes.data});
     dispatch({ 
       type: GET_POST, 
       payload: { post: postRes.data.post, comments: commentsRes.data}

@@ -35,14 +35,14 @@ const useFollow = (uid, followed_id) => {
       }
     }
     
-    axios.get(`/api/users/follow`, { uid, followed_id }, headers)
+    axios.post("/api/users/isfollowed", { uid, followed_id }, headers)
       .then((res) => {
         setIsFollowed(res.data.followed)
       })
       .catch((err) => {
-        dispatch(returnErrors(err.response.data, err.response.status, "LIKE_ERROR"));
+        dispatch(returnErrors(err.response.data, err.response.status, "FOLLOW_ERROR"));
         dispatch({
-          type: LIKE_ERROR
+          type: FOLLOW_ERROR
         })
       })
 
@@ -54,7 +54,7 @@ const useFollow = (uid, followed_id) => {
   }, [])
 
 
-  return [checkFollowed, () => {
+  return [isFollowed, () => {
     followUser()
   }]
 

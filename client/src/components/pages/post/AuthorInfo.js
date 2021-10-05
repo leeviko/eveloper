@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import { useSelector } from 'react-redux';
+import useFollow from '../../../hooks/useFollow';
 
-const AuthorInfo = ({ author }) => {
-  const user = useSelector(state => state.auth.user)
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
-  const [uid, setUid] = useState(null)
+const AuthorInfo = ({ author, uid }) => {
+  const [isFollowed, follow] = useFollow(uid, author.uid);
 
-  useEffect(() => {
-    if(isAuthenticated) {
-      setUid(user.uid)
-    }
-  }, [])
+  const handleFollow = () => {
+    follow()
+  }
 
   return (
     <>
       <p className="author-name">{author.name}</p>
       <p className="author-desc">{author.description}</p>
       <button 
-        onClick={() => console.log("lol")} 
+        type="submit"
+        onClick={() => handleFollow()} 
         className="author-follow btn" 
         disabled={uid === author.uid ? true : false}
-      >Follow</button>
+      >
+        {
+          isFollowed === null ? "Loading..." :
+          isFollowed ? "Unfollow" : "Follow"
+        }
+      </button>
     </>
   )
 }
