@@ -7,7 +7,8 @@ import {
   POSTS_LOADING,
   POST_ERROR,
   CLEAR_POSTS,
-  POST_LIKES
+  POST_LIKES,
+  NEW_COMMENT
 } from "../actions/types";
 
 const initialState = {
@@ -34,6 +35,11 @@ export default (state = initialState, action) => {
         isLoading: false,
         post: action.payload,
       };
+    case NEW_COMMENT:
+      return {
+        ...state,
+        post: {...state.post, comments: action.payload}
+      }
     case LIKE_POST: 
       return {
         ...state,

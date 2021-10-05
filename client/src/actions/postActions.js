@@ -85,6 +85,7 @@ export const newComment = (bid, uid, comment, name) => dispatch => {
     .then(res => {
       dispatch({ 
         type: NEW_COMMENT,
+        payload: res.data
       })
     })
     .catch((err) => {

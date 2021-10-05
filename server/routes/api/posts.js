@@ -311,10 +311,20 @@ router.post("/:slug/comment", [
       return res.status(400).json([{ msg: err }])
     }
 
-    res.json({
-      newComment
-    })
+    let sql = "SELECT comment_id, bid, comment, createdat, name from post_comments WHERE bid = $1 ORDER BY createdat desc";
 
+    pool.query(sql, [bid], (err, result) => {
+      if(err) {
+        return res.status(400).json([{ msg: err }])
+      }
+  
+      const comments = result.rows;
+  
+      res.json({
+        comments
+      })
+  
+    })
   })
 
 })
