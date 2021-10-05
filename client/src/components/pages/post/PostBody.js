@@ -41,14 +41,13 @@ const PostBody = ({ post, comments }) => {
 
     if(!values.newComment) {
       return console.log("Comment cant be empty");
+    } else {
+      if(isAuthenticated) {
+        dispatch(newComment(post.bid, uid, values.newComment, user.name))
+      }
     }
 
-    if(isAuthenticated) {
-      dispatch(newComment(post.bid, uid, values.newComment, user.name))
-    }
   }
-
-  // const uid = useSelector(state => state.auth.user.uid)
 
   return (
     <>

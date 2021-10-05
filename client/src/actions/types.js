@@ -29,3 +29,5 @@ export const SEARCH_LOADING = "SEARCH_LOADING";
 
 export const NEW_COMMENT = "NEW_COMMENT";
 export const COMMENT_ERROR = "COMMENT_ERROR";
+
+export const FOLLOW_ERROR = "FOLLOW_ERROR";
