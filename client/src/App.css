@@ -298,6 +298,38 @@ a {
   margin: 15px 0;
 }
 
+/* HOME */
+.home {
+  width: 100%;
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+}
+
+.home-container {
+  width: 80%;
+}
+
+.home-feed {
+  display: flex;
+  justify-content: center;
+}
+
+.home-feed-container {
+  width: 50%;
+}
+
+.home-nav {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+}
+
+.feed-content {
+}
+
+
 .login, .register {
   margin: auto;
   width: 33%;
@@ -441,9 +473,11 @@ a {
 
 .editor-options {
   display: flex;
-  justify-content: right;
 }
 
+.post-container .editor-options {
+  justify-content: right;
+}
 .option-btn {
   transition: 0.2s;
   position: relative;

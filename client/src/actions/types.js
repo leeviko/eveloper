@@ -31,3 +31,6 @@ export const NEW_COMMENT = "NEW_COMMENT";
 export const COMMENT_ERROR = "COMMENT_ERROR";
 
 export const FOLLOW_ERROR = "FOLLOW_ERROR";
+
+export const RECENT_FAIL = "RECENT_FAIL";
+export const GET_RECENT = "GET_RECENT";

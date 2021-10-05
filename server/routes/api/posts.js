@@ -64,6 +64,28 @@ router.post("/", [
 })
 
 /**
+ * @route  Get api/posts/
+ * @desc   Get posts
+ * @access Public
+*/
+router.get("/", (req, res) => {
+
+  const sql = "SELECT * FROM posts ORDER BY createdat desc LIMIT 10";
+
+  pool.query(sql, (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    res.json({
+      result: result.rows
+    })
+
+  })
+
+})
+
+/**
  * @route  Get api/posts/search/:slug
  * @desc   Get posts by title
  * @access Public

@@ -6,7 +6,6 @@ import SearchForm from "./SearchForm";
 import Dropdown from "./Dropdown";
 
 import AccountImg from "../../images/account_fill.svg";
-import AlertImg from "../../images/notifications.svg";
 
 
 const LoggedIn = () => {
@@ -16,7 +15,6 @@ const LoggedIn = () => {
   return (
     <>
       <Link to="/create-new" className="nav-item create-new-btn btn">Create a Post</Link>
-      <button className="nav-item nav-item-btn alert-link"><img alt="" src={AlertImg} /></button>
       <button
         className="nav-item nav-item-btn profile-nav-link" 
         onMouseEnter={() => setShowMenu(true)}

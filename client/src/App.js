@@ -25,7 +25,11 @@ const AppContent = () => {
       <Switch>
         <Route exact path="/">
           <Navbar />
-          <Home />
+          <Home currentPage="recent" />
+        </Route>
+        <Route path="/top">
+          <Navbar />
+          <Home currentPage="top" />
         </Route>
         <Route path="/login">
           <Navbar />

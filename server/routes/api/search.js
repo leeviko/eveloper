@@ -69,4 +69,23 @@ router.get("/posts/:slug", [
 
 })
 
+router.get("/recentFeed", (req, res) => {
+  
+  const sql = "SELECT * FROM posts ORDER BY createdat DESC LIMIT 50"
+
+  pool.query(sql, (err, result) => {
+    if(err) {
+      return res.json([{ msg: err }])
+    }
+
+    const recentResult = result.rows
+
+    res.json({
+      recentResult
+    })
+
+  })
+
+})
+
 module.exports = router;
