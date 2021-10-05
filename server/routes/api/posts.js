@@ -247,7 +247,7 @@ router.get("/:slug/comments", [
 ], (req, res) => {
   const bid = req.params.slug;
 
-  let sql = "SELECT comment_id, bid, comment, createdat, name from post_comments WHERE bid = $1";
+  let sql = "SELECT comment_id, bid, comment, createdat, name from post_comments WHERE bid = $1 ORDER BY createdat desc";
 
   pool.query(sql, [bid], (err, result) => {
     if(err) {

@@ -27,6 +27,8 @@ const PostBody = ({ post, comments }) => {
   const user = useSelector(state => state.auth.user)
   const [uid, setUid] = useState("");
   const [values, handleChange] = useForm({ newComment: "" })
+  const [errors, setErrors] = useState([])
+
 
   useEffect(() => {
     if(isAuthenticated) {
@@ -36,9 +38,12 @@ const PostBody = ({ post, comments }) => {
 
   const handleComment = (e) => {
     e.preventDefault();
-    if(!isAuthenticated) {
-      
-    } else {
+
+    if(!values.newComment) {
+      return console.log("Comment cant be empty");
+    }
+
+    if(isAuthenticated) {
       dispatch(newComment(post.bid, uid, values.newComment, user.name))
     }
   }
