@@ -40,14 +40,16 @@ const PostBody = ({ post, comments }) => {
   const handleComment = (e) => {
     e.preventDefault();
 
-    if(!values.newComment) {
+    setErrors([]);
+
+    if(!isAuthenticated) {
       setErrors(prev => [...prev, {msg: "You need to be logged in", param: ""}]);
     } else {
-      if(isAuthenticated) {
+      if(!values.newComment) {
+        setErrors(prev => [...prev, {msg: "Comment can't be empty", param: ""}]);
+      } else {
         dispatch(newComment(post.bid, uid, values.newComment, user.name))
-
         values.newComment = "";
-
       }
     }
 
