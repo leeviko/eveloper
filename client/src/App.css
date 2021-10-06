@@ -369,7 +369,6 @@ a {
 
 /* PROFILE PAGE */
 .profile {
-
   width: 60%;
   margin: 50px auto;
   color: var(--white);
@@ -382,7 +381,7 @@ a {
 
 .profile-main-section .top {
   display: flex;
-  justify-content: right;
+  justify-content: center;
 }
 
 .profile-img {

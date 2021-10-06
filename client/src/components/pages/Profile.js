@@ -11,7 +11,6 @@ const Profile = () => {
 
         <div className="profile-main-section p-section">
           <div className="top">
-            <img className="profile-img" src={AccountImg} />
             <div className="profile-options">
               <button className="profile-edit-btn btn">Edit Profile</button>
             </div>
