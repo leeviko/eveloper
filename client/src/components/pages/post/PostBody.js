@@ -41,10 +41,13 @@ const PostBody = ({ post, comments }) => {
     e.preventDefault();
 
     if(!values.newComment) {
-      return console.log("Comment cant be empty");
+      setErrors(prev => [...prev, {msg: "You need to be logged in", param: ""}]);
     } else {
       if(isAuthenticated) {
         dispatch(newComment(post.bid, uid, values.newComment, user.name))
+
+        values.newComment = "";
+
       }
     }
 
@@ -104,6 +107,15 @@ const PostBody = ({ post, comments }) => {
                   placeholder="Add new comment"
                 >
                 </textarea>
+                {
+                  <ul className={"errors " + (errors[0] ? "show" : "hide") }>
+                    {
+                      errors ? errors.map((error, i) => (
+                        <li className="alert" key={i}>{error.msg}</li>
+                      )) : null
+                    }
+                  </ul>
+                }
                 <button type="submit" className="comment-btn btn">Submit</button>
               </form>
               {
