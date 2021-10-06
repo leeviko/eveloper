@@ -12,6 +12,7 @@ import { newComment } from '../../../actions/postActions';
 
 import useLike from '../../../hooks/useLike';
 import useForm from '../../../hooks/useForm';
+import useComment from '../../../hooks/useComment';
 
 import Tag from "./Tag";
 import Comment from "./Comment";
@@ -118,8 +119,9 @@ const PostBody = ({ post, comments }) => {
   )
 }
 
-export const UserActions = ({ bid, uid, commentCount }) => {
+export const UserActions = ({ bid, uid }) => {
   const dispatch = useDispatch();
+  const commentCount = useComment(bid)
   const error = useSelector(state => state.error)
   const [likesCount, like] = useLike(bid, uid);
 
