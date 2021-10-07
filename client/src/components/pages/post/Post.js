@@ -5,9 +5,12 @@ import { useParams } from 'react-router-dom';
 
 import PostBody from './PostBody';
 import PostSidebar from './PostSidebar';
+import PostActions from './PostActions';
 
 const Post = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user)
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const post = useSelector(state => state.post.post)
   const isLoading = useSelector(state => state.post.isLoading)
   const [renderPost, setRenderPost] = useState(false);
@@ -18,10 +21,10 @@ const Post = () => {
   }, [dispatch])
   
   useEffect(() => {
+
     try {
       if(post.post) {
         setRenderPost(true)
-        console.log(post.post.uid);
       }
     } catch(err) {
       setRenderPost(false)
@@ -32,6 +35,11 @@ const Post = () => {
     <div className="post post-wrapper">
       { renderPost && 
         <>
+          {
+            isAuthenticated &&
+            user.uid === post.post.uid &&
+            <PostActions post={post.post} />
+          }
           <PostBody post={post.post} comments={post.comments.comments} />
           <PostSidebar currPost={post.post} />
         </>
