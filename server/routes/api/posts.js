@@ -86,55 +86,64 @@ router.get("/", (req, res) => {
 })
 
 /**
- * @route  DELETE api/posts
+ * @route  DELETE api/posts/:bid
  * @desc   Delete a post
  * @access Private
 */
-router.delete("/", auth, (req, res) => {
-  const { bid } = req.body;
+router.delete("/:bid", [
+  check("bid").escape().trim()
+] ,auth, (req, res) => {
+  const bid = req.params.bid;
   const user = req.session.user
 
-  // if(post.uid != user.uid) {
-  //   return res.status(401).json([{ msg: "You can't do that!" }])
-  // }
-
-  // Delete likes
-  let sql = "DELETE FROM post_likes WHERE bid = $1";
+  sql = "SELECT uid, bid FROM posts WHERE bid = $1";
 
   pool.query(sql, [bid], (err, result) => {
     if(err) {
       return res.status(400).json([{ msg: err }])
     }
+    if(result.rowCount == 0) {
+      return res.status(404).json({ msg: "Post doesn't exist" })
+    }
+    
+    const postUid = result.rows[0].uid;
 
-    // Delete comments
-    sql = "DELETE FROM post_comments WHERE bid = $1";
-
+    if(postUid != user.uid) {
+      return res.status(401).json([{ msg: "You can't do that!" }])
+    }
+  
+    // Delete likes
+    let sql = "DELETE FROM post_likes WHERE bid = $1";
+  
     pool.query(sql, [bid], (err, result) => {
       if(err) {
         return res.status(400).json([{ msg: err }])
       }
-    })
-
-    // Delete the post
-    sql = "DELETE FROM posts WHERE bid = $1";
-
-    pool.query(sql, [bid], (err, result) => {
-      if(err) {
-        return res.status(400).json([{ msg: err }])
-      }
-
-      res.json({
-        msg: "Post deleted successfully"
+  
+      // Delete comments
+      sql = "DELETE FROM post_comments WHERE bid = $1";
+  
+      pool.query(sql, [bid], (err, result) => {
+        if(err) {
+          return res.status(400).json([{ msg: err }])
+        }
       })
-
+  
+      // Delete the post
+      sql = "DELETE FROM posts WHERE bid = $1";
+  
+      pool.query(sql, [bid], (err, result) => {
+        if(err) {
+          return res.status(400).json([{ msg: err }])
+        }
+  
+        res.json({
+          msg: "Post deleted successfully"
+        })
+  
+      })
     })
   })
-
-
-  // res.json({
-  //   es: req.session.user
-  // })
-
 
 })
 
