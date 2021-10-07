@@ -86,7 +86,60 @@ router.get("/", (req, res) => {
 })
 
 /**
- * @route  Get api/posts/search/:slug
+ * @route  DELETE api/posts
+ * @desc   Delete a post
+ * @access Private
+*/
+router.delete("/", auth, (req, res) => {
+  const { bid } = req.body;
+  const user = req.session.user
+
+  // if(post.uid != user.uid) {
+  //   return res.status(401).json([{ msg: "You can't do that!" }])
+  // }
+
+  // Delete likes
+  let sql = "DELETE FROM post_likes WHERE bid = $1";
+
+  pool.query(sql, [bid], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    // Delete comments
+    sql = "DELETE FROM post_comments WHERE bid = $1";
+
+    pool.query(sql, [bid], (err, result) => {
+      if(err) {
+        return res.status(400).json([{ msg: err }])
+      }
+    })
+
+    // Delete the post
+    sql = "DELETE FROM posts WHERE bid = $1";
+
+    pool.query(sql, [bid], (err, result) => {
+      if(err) {
+        return res.status(400).json([{ msg: err }])
+      }
+
+      res.json({
+        msg: "Post deleted successfully"
+      })
+
+    })
+  })
+
+
+  // res.json({
+  //   es: req.session.user
+  // })
+
+
+})
+
+/**
+ * @route  GET api/posts/search/:slug
  * @desc   Get posts by title
  * @access Public
 */
