@@ -46,6 +46,8 @@ const CreatePost = () => {
   
   // Is post submitted
   useEffect(() => {
+    console.log("asfafsaf, ", post);
+    console.log("sfasfasdf, ",error.id);
     try {
       if(post.newPost && error.id != "POST_ERROR") {
         setSubmitted(true)
@@ -62,8 +64,9 @@ const CreatePost = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    dispatch(clearErrors())
     const uid = user.uid;
+
     const newPost = {
       title,
       tags: tagsArr,
