@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from "../../../actions/postActions";
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 
 import PostBody from './PostBody';
 import PostSidebar from './PostSidebar';
@@ -31,7 +31,8 @@ const Post = () => {
     }
   }, [post, isLoading])
 
-  return (
+
+  return (  
     <div className="post post-wrapper">
       { renderPost && 
         <>

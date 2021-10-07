@@ -1,11 +1,12 @@
 import React from 'react'
 
 const PostActions = () => {
+
   return (
     <div className="post-actions post-sidebar">
-      <div className="post-sidebar-content">
-        <div className="btn delete-btn">Delete</div>
-      </div>
+      <form className="post-sidebar-content">
+        <button type="submit" className="btn delete-btn">Delete Post</button>
+      </form>
     </div>
   )
 }

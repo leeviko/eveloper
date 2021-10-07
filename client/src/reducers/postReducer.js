@@ -10,7 +10,8 @@ import {
   POST_LIKES,
   NEW_COMMENT,
   AUTHOR_ERROR,
-  GET_AUTHOR
+  GET_AUTHOR,
+  POST_DELETE
 } from "../actions/types";
 
 const initialState = {
@@ -52,6 +53,12 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false
       };
+    case POST_DELETE:
+      return {
+        ...state,
+        post: action.payload,
+        isLoading: false
+      }
     case CLEAR_POSTS:
     case POST_ERROR:
       return {

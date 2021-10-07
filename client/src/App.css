@@ -644,6 +644,15 @@ a {
   cursor: pointer;
 }
 
+/* POST ACTIONS */
+.post-actions .post-sidebar-content {
+  width: 100%;
+}
+.post-actions .delete-btn {
+  background-color: var(--danger);
+  width: 100%;
+}
+
 /* POST SIDEBAR */
 .post-sidebar {
   background-color: var(--blue-post);

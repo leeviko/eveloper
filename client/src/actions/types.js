@@ -39,3 +39,6 @@ export const GET_TOP = "GET_TOP";
 
 export const GET_AUTHOR = "GET_AUTHOR";
 export const AUTHOR_ERROR = "AUTHOR_ERROR";
+
+export const POST_DELETE = "POST_DELETE";
+export const POST_DELETE_FAIL = "POST_DELETE_FAIL"

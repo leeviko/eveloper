@@ -14,7 +14,9 @@ import {
   NEW_COMMENT,
   COMMENT_ERROR,
   GET_AUTHOR,
-  AUTHOR_ERROR
+  AUTHOR_ERROR,
+  POST_DELETE,
+  POST_DELETE_FAIL,
 } from "./types";
 
 
@@ -42,6 +44,32 @@ export const addPost = (post) => dispatch => {
         type: POST_ERROR
       })
     })
+}
+
+// Delete post
+export const deletePost = (post) => dispatch => {
+  const headers = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  axios.delete(`/api/posts/${post.bid}`, headers)
+    .then((res) => {
+      dispatch({
+        type: POST_DELETE,
+        payload: res.data
+      })
+      return res.data;
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status, "POST_DELETE_FAIL"));
+      dispatch({
+        type: POST_DELETE_FAIL
+      })
+      return err;
+    })
+
 }
 
 // Get post
