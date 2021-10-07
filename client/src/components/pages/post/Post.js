@@ -5,11 +5,9 @@ import { useParams } from 'react-router-dom';
 
 import PostBody from './PostBody';
 import PostSidebar from './PostSidebar';
-import useGetAuthor from '../../../hooks/useGetAuthor';
 
 const Post = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const post = useSelector(state => state.post.post)
   const isLoading = useSelector(state => state.post.isLoading)
   const [renderPost, setRenderPost] = useState(false);
@@ -23,26 +21,19 @@ const Post = () => {
     try {
       if(post.post) {
         setRenderPost(true)
+        console.log(post.post.uid);
       }
     } catch(err) {
       setRenderPost(false)
     }
   }, [post, isLoading])
 
-  // useEffect(() => {
-  //   if(post && !isLoading) {
-  //     setRenderPost(true)
-  //   } else {
-  //     setRenderPost(false)
-  //   }
-  // }, [user, isLoading])
-
   return (
     <div className="post post-wrapper">
       { renderPost && 
         <>
           <PostBody post={post.post} comments={post.comments.comments} />
-          <PostSidebar post={post.post} />
+          <PostSidebar currPost={post.post} />
         </>
       }
     </div>

@@ -13,6 +13,8 @@ import {
   POST_LIKES,
   NEW_COMMENT,
   COMMENT_ERROR,
+  GET_AUTHOR,
+  AUTHOR_ERROR
 } from "./types";
 
 
@@ -93,6 +95,30 @@ export const newComment = (bid, uid, comment, name) => dispatch => {
         type: COMMENT_ERROR
       })
     })
+}
+
+export const getAuthor = (author_id) => dispatch => {
+
+  const headers = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  axios.get(`/api/search/users/${author_id}`, headers)
+  .then((res) => {
+    dispatch({ 
+      type: GET_AUTHOR,
+      payload: res.data.usersRes[0]
+    })
+  })
+  .catch((err) => {
+    dispatch(returnErrors(err.response.data, err.response.status, "AUTHOR_ERROR"));
+    dispatch({
+      type: AUTHOR_ERROR
+    })
+  })
+
 }
 
 export const clearPosts = () => {

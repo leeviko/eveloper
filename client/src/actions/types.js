@@ -36,3 +36,6 @@ export const RECENT_FAIL = "RECENT_FAIL";
 export const GET_RECENT = "GET_RECENT";
 export const TOP_FAIL = "TOP_FAIL";
 export const GET_TOP = "GET_TOP";
+
+export const GET_AUTHOR = "GET_AUTHOR";
+export const AUTHOR_ERROR = "AUTHOR_ERROR";

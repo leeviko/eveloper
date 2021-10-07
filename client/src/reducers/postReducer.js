@@ -8,7 +8,9 @@ import {
   POST_ERROR,
   CLEAR_POSTS,
   POST_LIKES,
-  NEW_COMMENT
+  NEW_COMMENT,
+  AUTHOR_ERROR,
+  GET_AUTHOR
 } from "../actions/types";
 
 const initialState = {
@@ -39,7 +41,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         post: {...state.post, comments: action.payload}
-      }
+      };
+    case GET_AUTHOR:
+      return {
+        ...state,
+        post: { ...state.post, author: action.payload }
+      };
     case LIKE_POST: 
       return {
         ...state,

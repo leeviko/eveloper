@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Switch, Route } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 import HomeNav from './HomeNav';
 import RecentFeed from "./RecentFeed";
 import TopFeed from "./TopFeed";
+import { clearPosts } from '../../../actions/postActions';
 
 const Home = ({ currentPage }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearPosts())
+  }, [])
+
   return (
     <div className="home">
       <div className="home-container">
