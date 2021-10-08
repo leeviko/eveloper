@@ -1,6 +1,6 @@
 # Eveloper
 #### Dev.to clone (Built for practise purposes)
-(This is still in progress)
+This is still in progress
 
 ## Features
 - [x] Registration and authentication
@@ -8,9 +8,9 @@
 - [x] Search for users and posts
 - [x] Like post
 - [x] Comment post
-- [ ] Edit post
+- [x] Delete post
+- [x] Follow user
 - [ ] Search for posts by tag, user or popularity
-- [ ] Follow user
 
 ## Getting started
 
