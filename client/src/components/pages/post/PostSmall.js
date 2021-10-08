@@ -16,6 +16,7 @@ const PostSmall = ({ bid, author_id, title, tags, date }) => {
   const author = useGetAuthor(author_id)
   const formatDate = useDate(date)
   const [uid, setUid] = useState(null)
+  
   useEffect(() => {
     if(user.isAuthenticated) {
       setUid(user.user.uid)

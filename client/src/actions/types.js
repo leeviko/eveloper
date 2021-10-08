@@ -42,3 +42,6 @@ export const AUTHOR_ERROR = "AUTHOR_ERROR";
 
 export const POST_DELETE = "POST_DELETE";
 export const POST_DELETE_FAIL = "POST_DELETE_FAIL"
+
+export const GET_PROFILE = "GET_PROFILE";
+export const PROFILE_ERROR = "PROFILE_ERROR";

@@ -51,13 +51,11 @@ const Post = () => {
           {
             isAuthenticated &&
             user.uid === post.post.uid &&
-            <>
-              <div className="post-actions post-sidebar">
-                <form className="post-sidebar-content" onSubmit={(e) => handleDelete(e)}>
-                  <button type="submit" className="btn delete-btn">Delete Post</button>
-                </form>
-              </div>
-            </>
+            <div className="post-actions post-sidebar">
+              <form className="post-sidebar-content" onSubmit={(e) => handleDelete(e)}>
+                <button type="submit" className="btn delete-btn">Delete Post</button>
+              </form>
+            </div>
             // <PostActions post={post.post} />
           }
           <PostBody post={post.post} comments={post.comments.comments} />

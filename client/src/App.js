@@ -12,7 +12,7 @@ import CreateNewNav from "./components/pages/CreateNew/CreateNewNav";
 import Spinner from "./components/Spinner";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
-import Profile from "./components/pages/Profile";
+import Profile from "./components/pages/profile/Profile";
 import CreatePost from "./components/pages/CreateNew/CreatePost";
 import Post from "./components/pages/post/Post";
 import Logout from "./components/pages/Logout";
@@ -39,7 +39,7 @@ const AppContent = () => {
           <Navbar />
           <Register />
         </Route>
-        <Route path="/profile">
+        <Route path="/profile/:name">
           <Navbar />
           <Profile />
         </Route>

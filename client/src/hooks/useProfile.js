@@ -28,7 +28,6 @@ const useProfile = (name) => {
         })
       })
 
-    return profile;
   }
 
   useEffect(() => {
