@@ -22,7 +22,7 @@ const LoggedIn = () => {
       >
         <img alt="" src={AccountImg} />
         <span>{username}</span>
-        <Dropdown show={showMenu} />
+        <Dropdown show={showMenu} username={username} />
       </button>
     </>
   )

@@ -27,9 +27,7 @@ const Profile = () => {
               { 
                 isAuthenticated &&
                 user.uid === userProf.user.uid &&
-                <div className="profile-options">
-                  <Link to="/settings/profile" className="profile-edit-btn btn">Edit Profile</Link>
-                </div>
+                <Link to="/settings" className="profile-edit-btn btn">Edit Profile</Link>
               }
             </div>
             <div className="bottom">

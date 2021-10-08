@@ -19,6 +19,7 @@
 
 
   --danger: #fb3333;
+  --danger-dark: #941d1d;
   --danger-transp: #fb333310;
 
   --default-animation: scale3d(1.07, 1.07, 1.07);
@@ -363,6 +364,74 @@ a {
   margin-top: 10px;
 }
 
+/* SETTINGS */
+.settings {
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+}
+
+.settings-title {
+  margin: 5px 15px;
+  font-size: 1.4rem;
+}
+
+.settings-content {
+  display: flex;
+
+}
+
+.settings nav {
+  width: 150px;
+  margin: 0 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-item {
+  font-size: 0.9rem;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  transition: 0.2s;
+}
+
+.sidenav-item:hover {
+  background-color: var(--accent-transparent);
+}
+
+.sidenav-item.active {
+  background-color: var(--accent-hover);
+}
+
+.settings-detail {
+  margin: 5px 0;
+  width: 500px;
+}
+
+.setting-section {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--blue);
+}
+
+.setting-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-section label {
+  font-size: 1rem;
+  margin: 10px 0 0 0;
+}
+
+.setting-btn {
+  margin: 10px 0 0 0;
+  width: 100%;
+}
+
 /* PROFILE PAGE */
 .profile {
   width: 60%;
@@ -643,9 +712,14 @@ a {
 .post-actions .post-sidebar-content {
   width: 100%;
 }
-.post-actions .delete-btn {
+
+.delete-btn {
   background-color: var(--danger);
   width: 100%;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-dark);
 }
 
 /* POST SIDEBAR */
@@ -726,23 +800,26 @@ a {
   margin: 10px 0;
 }
 
-.post-comments .new-comment textarea {
-  border-radius: 3px;
+.input {
+  border-radius: 5px;
   color: var(--white);
   font-family: inherit;
   padding: 5px;
+  border: 1px solid var(--blue-transp);
+  background-color: var(--blue-post-transp);
+  transition: 0.2s;
+}
+
+.input:focus {
+  background-color: var(--dark-blue);
+}
+
+textarea {
   max-width: 100%;
   min-width: 100%;
   max-height: 125px;
   min-height: 125px;
-  border: 1px solid var(--blue-transp);
-  background-color: var(--blue-post-transp);
-  transition: 0.2s;
   resize: none;
-}
-
-.post-comments .new-comment textarea:focus {
-  background-color: var(--dark-blue);
 }
 
 .comment-btn {

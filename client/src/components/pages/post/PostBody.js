@@ -107,6 +107,7 @@ const PostBody = ({ post, comments }) => {
                   value={values.newComment} 
                   onChange={handleChange}
                   placeholder="Add new comment"
+                  className="input"
                 >
                 </textarea>
                 {

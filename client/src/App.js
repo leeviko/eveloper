@@ -17,6 +17,7 @@ import CreatePost from "./components/pages/CreateNew/CreatePost";
 import Post from "./components/pages/post/Post";
 import Logout from "./components/pages/Logout";
 import Search from "./components/pages/Search";
+import Settings from './components/pages/settings/Settings';
 
 const AppContent = () => {
   return (
@@ -58,6 +59,10 @@ const AppContent = () => {
         <Route path="/search/:query">
           <Navbar />
           <Search />
+        </Route>
+        <Route path="/settings">
+          <Navbar />
+          <Settings />
         </Route>
       </Switch>
     </div>
