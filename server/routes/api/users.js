@@ -114,11 +114,11 @@ router.get("/profile/:name", (req, res) => {
       }
 
       const user = result1.rows[0];
-      const userPosts = result2.rows;
+      const posts = result2.rows;
 
       res.json({
         user,
-        userPosts
+        posts
       })
 
     })
