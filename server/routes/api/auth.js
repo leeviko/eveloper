@@ -33,7 +33,7 @@ router.post("/", [
   const { email, password } = req.body;
   
   
-  const sql = "SELECT * FROM users WHERE email = $1";
+  const sql = "SELECT * FROM users WHERE email = $1 LIMIT 1";
 
   pool.query(sql, [email], (err, result) => {
     if(err) {

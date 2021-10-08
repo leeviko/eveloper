@@ -46,7 +46,7 @@ router.post("/", [
   }
 
   // Check if user already exists
-  const sql = "SELECT email FROM users WHERE email = $1";
+  const sql = "SELECT email FROM users WHERE email = $1 LIMIT 1";
 
   pool.query(sql, [newUser.email], (err, result) => {
     if(err) {
@@ -107,7 +107,7 @@ router.post("/isfollowed",[
     return res.status(400).json([{ msg: "Something went wrong:(" }])
   }
 
-  sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2";
+  sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2 LIMIT 1";
 
   pool.query(sql, [uid, followed_id], (err, result) => {
     if(err) {
@@ -152,7 +152,7 @@ router.post("/follow", [
   }
 
   // Check if already followed
-  const sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2"
+  const sql = "SELECT follower_id, followed_id FROM user_follows WHERE follower_id = $1 AND followed_id = $2 LIMIT 1"
 
   pool.query(sql, [uid, followed_id], (err, result) => {
     if(err) {
