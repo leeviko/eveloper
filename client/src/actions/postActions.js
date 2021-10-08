@@ -47,27 +47,25 @@ export const addPost = (post) => dispatch => {
 }
 
 // Delete post
-export const deletePost = (post) => dispatch => {
+export const deletePost = (bid) => dispatch => {
   const headers = {
     headers: {
       "Content-Type": "application/json"
     }
   }
-
-  axios.delete(`/api/posts/${post.bid}`, headers)
+  console.log(bid);
+  axios.delete(`/api/posts/${bid}`, headers)
     .then((res) => {
       dispatch({
         type: POST_DELETE,
         payload: res.data
       })
-      return res.data;
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status, "POST_DELETE_FAIL"));
       dispatch({
         type: POST_DELETE_FAIL
       })
-      return err;
     })
 
 }

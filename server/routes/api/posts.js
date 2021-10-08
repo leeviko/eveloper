@@ -95,7 +95,7 @@ router.delete("/:bid", [
 ] ,auth, (req, res) => {
   const bid = req.params.bid;
   const user = req.session.user
-
+  console.log(bid);
   sql = "SELECT uid, bid FROM posts WHERE bid = $1";
 
   pool.query(sql, [bid], (err, result) => {
