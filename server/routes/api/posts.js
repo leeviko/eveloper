@@ -51,7 +51,7 @@ router.post("/", [
       } else if(err.code === "23503") {
         return res.status(400).json([{ msg: "Author doesnt exist..." }])
       } else {
-        return res.status(400).json([{ msg: newPost.bid }])
+        return res.status(400).json([{ msg: "Something unexpected happened:/" }])
       }
     } 
 
@@ -70,7 +70,7 @@ router.post("/", [
 */
 router.get("/", (req, res) => {
 
-  const sql = "SELECT * FROM posts ORDER BY createdat desc LIMIT 10";
+  const sql = "SELECT * FROM posts ORDER BY createdat desc LIMIT 15";
 
   pool.query(sql, (err, result) => {
     if(err) {
@@ -96,7 +96,8 @@ router.delete("/:bid", [
   const bid = req.params.bid;
   const user = req.session.user
   console.log(bid);
-  sql = "SELECT uid, bid FROM posts WHERE bid = $1";
+
+  sql = "SELECT uid, bid FROM posts WHERE bid = $1 LIMIT 1";
 
   pool.query(sql, [bid], (err, result) => {
     if(err) {
@@ -163,7 +164,7 @@ router.get("/search/:slug", [
 
   const searchQuery = req.params.slug;
 
-  const sql = "SELECT * FROM posts WHERE title LIKE $1";
+  const sql = "SELECT * FROM posts WHERE title LIKE $1 ORDER BY createdat LIMIT 15";
 
   pool.query(sql, ["%" + searchQuery + "%"], (err, result) => {
     if(err) {
@@ -192,7 +193,7 @@ router.get("/:slug/", [
 
   const query = {
     name: "get-post",
-    text: "SELECT * FROM posts WHERE bid = $1",
+    text: "SELECT * FROM posts WHERE bid = $1 LIMIT 1",
     values: [bid],
   }
   pool.query(query, (err, result) => {
@@ -221,7 +222,7 @@ router.post("/:slug/like", [
   const bid = req.params.slug;
   const { uid } = req.body;
 
-  let sql = "SELECT bid, uid FROM post_likes WHERE bid = $1 AND uid = $2";
+  let sql = "SELECT bid, uid FROM post_likes WHERE bid = $1 AND uid = $2 LIMIT 1";
 
   pool.query(sql, [bid, uid], (err, result) => {
     if(err) {

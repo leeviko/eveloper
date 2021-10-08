@@ -92,6 +92,43 @@ router.post("/", [
 })
 
 /**
+ * @route  GET api/users/profile/:name
+ * @desc   Get user profile
+ * @access Private
+*/
+router.get("/profile/:name", (req, res) => {
+  const name = req.params.name;
+
+  let sql = "SELECT uid, name, createdat, description FROM users WHERE name = $1 LIMIT 1"
+
+  pool.query(sql, [name], (err, result1) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }]);
+    }
+
+    sql = "SELECT bid, uid, title, tags, createdat FROM posts WHERE uid = $1";
+
+    pool.query(sql, [result1.rows[0].uid], (err, result2) => {
+      if(err) {
+        return res.status(400).json([{ msg: err }]);
+      }
+
+      const user = result1.rows[0];
+      const userPosts = result2.rows;
+
+      res.json({
+        user,
+        userPosts
+      })
+
+    })
+
+
+  })
+
+})
+
+/**
  * @route  GET api/users/follow
  * @desc   Check if followed
  * @access Private

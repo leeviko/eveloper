@@ -20,7 +20,7 @@ router.get("/users/:slug", [
 
   let usersRes;
 
-  sql = "SELECT uid, email, name, createdat, description FROM users WHERE name LIKE $1 OR uid = $2";
+  sql = "SELECT uid, email, name, createdat, description FROM users WHERE name LIKE $1 OR uid = $2 ORDER BY createdat LIMIT 15";
 
   pool.query(sql, ["%" + searchQuery + "%", searchQuery], (err, result) => {
     if(err) {
@@ -53,7 +53,7 @@ router.get("/posts/:slug", [
 
   let postsRes;
 
-  sql = "SELECT * FROM posts WHERE title LIKE $1";
+  sql = "SELECT * FROM posts WHERE title LIKE $1 ORDER BY createdat LIMIT 15";
 
   pool.query(sql, ["%" + searchQuery + "%"], (err, result) => {
     if(err) {
@@ -76,7 +76,7 @@ router.get("/posts/:slug", [
 */
 router.get("/recentFeed", (req, res) => {
   
-  const sql = "SELECT * FROM posts ORDER BY createdat LIMIT 50"
+  const sql = "SELECT * FROM posts ORDER BY createdat LIMIT 15"
 
   pool.query(sql, (err, result) => {
     if(err) {
@@ -100,7 +100,7 @@ router.get("/recentFeed", (req, res) => {
 */
 router.get("/topFeed", (req, res) => {
 
-  const sql = "SELECT posts.*, (SELECT COUNT(*) FROM post_likes WHERE post_likes.bid = posts.bid) AS LIKES FROM posts ORDER BY LIKES desc";
+  const sql = "SELECT posts.*, (SELECT COUNT(*) FROM post_likes WHERE post_likes.bid = posts.bid) AS LIKES FROM posts ORDER BY LIKES desc LIMIT 15";
 
   pool.query(sql, (err, result) => {
     if(err) {
