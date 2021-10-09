@@ -129,6 +129,55 @@ router.get("/profile/:name", (req, res) => {
 })
 
 /**
+ * @route  PUT api/users/
+ * @desc   Update user
+ * @access Private
+*/
+router.put("/", [
+  check("edit"),
+], auth, (req, res) => {
+  const uid = req.session.user.uid;
+  const { edit } = req.body;
+
+  sql = "SELECT email, name, description FROM users WHERE uid = $1";
+
+  pool.query(sql, [uid], (err, result) => {
+    if(err) {
+      return res.status(400).json([{ msg: err }])
+    }
+
+    const user = result.rows[0];
+    
+    let newInfo = {
+      name: edit.name || user.name,
+      description: edit.description || user.description,
+      email: edit.email || user.email
+    };
+    
+    const query = {
+      name: "update-user",
+      text: "UPDATE users SET name = $1, description = $2, email = $3 WHERE uid = $4",
+      values: [newInfo.name, newInfo.description, newInfo.email, uid],
+    }
+    
+    pool.query(query, (err, result) => {
+      if(err) {
+        return res.status(400).json([{ msg: err }])
+      }
+
+      res.json([{
+        msg: "Updated successfully"
+      }])
+
+    })
+
+
+  }) 
+
+
+})  
+
+/**
  * @route  GET api/users/follow
  * @desc   Check if followed
  * @access Private
