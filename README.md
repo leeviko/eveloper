@@ -2,6 +2,8 @@
 #### Dev.to clone (Built for practise purposes)
 This is still in progress
 
+![Alt Text](Eveloper_demo.gif)
+
 ## Features
 - [x] Registration and authentication
 - [x] Create a post
