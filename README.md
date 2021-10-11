@@ -10,6 +10,7 @@ This is still in progress
 - [x] Comment post
 - [x] Delete post
 - [x] Follow user
+- [ ] Update user info
 - [ ] Search for posts by tag, user or popularity
 
 ## Getting started
