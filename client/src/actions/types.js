@@ -45,3 +45,6 @@ export const POST_DELETE_FAIL = "POST_DELETE_FAIL"
 
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
+
+export const UPDATE_ERROR = "UPDATE_ERROR";
+export const UPDATE_USER = "UPDATE_USER";

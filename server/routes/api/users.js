@@ -139,7 +139,7 @@ router.put("/", [
   const uid = req.session.user.uid;
   const { edit } = req.body;
 
-  sql = "SELECT email, name, description FROM users WHERE uid = $1";
+  sql = "SELECT email, description FROM users WHERE uid = $1";
 
   pool.query(sql, [uid], (err, result) => {
     if(err) {
@@ -149,15 +149,14 @@ router.put("/", [
     const user = result.rows[0];
     
     let newInfo = {
-      name: edit.name || user.name,
       description: edit.description || user.description,
       email: edit.email || user.email
     };
     
     const query = {
       name: "update-user",
-      text: "UPDATE users SET name = $1, description = $2, email = $3 WHERE uid = $4",
-      values: [newInfo.name, newInfo.description, newInfo.email, uid],
+      text: "UPDATE users SET description = $1, email = $2 WHERE uid = $3",
+      values: [newInfo.description, newInfo.email, uid],
     }
     
     pool.query(query, (err, result) => {

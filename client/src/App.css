@@ -17,6 +17,9 @@
   --blue-post: #0c304b;
   --blue-post-transp: hsla(206, 96%, 59%, 0.05);
 
+  --green: #44fb33;
+  --green-dark: #29941f;
+  --green-transp: #29941f11;
 
   --danger: #fb3333;
   --danger-dark: #941d1d;
@@ -66,6 +69,19 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.msg {
+  background-color: var(--green-transp);
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  margin: 5px 0;
+  padding: 10px 15px;
+}
+
+.msg span {
+  font-size: 0.8rem;
+  color: var(--green);
 }
 
 .errors {
