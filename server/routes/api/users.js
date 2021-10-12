@@ -129,6 +129,53 @@ router.get("/profile/:name", (req, res) => {
 })
 
 /**
+ * @route  DELETE api/users/
+ * @desc   Delete user
+ * @access Private
+*/
+router.delete("/", auth, (req, res) => {
+  const user = req.session.user;
+  const uid = user.uid;
+
+
+  let sql = "DELETE FROM post_likes WHERE uid = $1";
+
+  pool.query(sql, [uid], (err, result) => {
+    sql = "DELETE FROM post_comments WHERE uid = $1";
+
+    pool.query(sql, [uid], (err, result) => {
+
+      sql = "DELETE FROM posts WHERE uid = $1"
+
+      pool.query(sql, [uid], (err, result) => {
+
+        sql = "DELETE FROM user_follows WHERE follower_id = $1 OR followed_id = $1";
+
+        pool.query(sql, [uid], (err, result) => {
+
+          sql = "DELETE FROM users WHERE uid = $1";
+  
+          pool.query(sql, [uid], (err, result) => {
+            if(err) {
+              return res.status(400).json([{ msg: err }])
+            }
+  
+            res.json({
+              msg: "User deleted successfully"
+            })
+  
+          })
+        })
+
+
+      })
+
+    })
+
+  })
+})
+
+/**
  * @route  PUT api/users/
  * @desc   Update user
  * @access Private
@@ -139,7 +186,7 @@ router.put("/", [
   const uid = req.session.user.uid;
   const { edit } = req.body;
 
-  sql = "SELECT email, description FROM users WHERE uid = $1";
+  let sql = "SELECT email, description FROM users WHERE uid = $1";
 
   pool.query(sql, [uid], (err, result) => {
     if(err) {
