@@ -15,6 +15,18 @@ This is still in progress
 - [x] Update user info
 - [ ] Search for posts by tag, user or popularity
 
+## Stack
+### Front End
+- React
+- Redux
+- react-router
+- react-markdown
+### Back End
+- Node.js
+- Express
+- PostgreSQL
+- SQLite3 for session storage
+
 ## Getting started
 
 1. First clone the repo:
