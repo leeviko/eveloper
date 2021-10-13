@@ -48,3 +48,6 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 
 export const UPDATE_ERROR = "UPDATE_ERROR";
 export const UPDATE_USER = "UPDATE_USER";
+
+export const DELETE_FAIL = "DELETE_FAIL";
+export const DELETE_USER = "DELETE_USER";

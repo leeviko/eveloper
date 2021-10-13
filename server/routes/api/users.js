@@ -137,7 +137,6 @@ router.delete("/", auth, (req, res) => {
   const user = req.session.user;
   const uid = user.uid;
 
-
   let sql = "DELETE FROM post_likes WHERE uid = $1";
 
   pool.query(sql, [uid], (err, result) => {
@@ -159,10 +158,15 @@ router.delete("/", auth, (req, res) => {
             if(err) {
               return res.status(400).json([{ msg: err }])
             }
-  
-            res.json({
-              msg: "User deleted successfully"
+            
+            req.session.destroy((err) => {
+              if(err) throw err;
+              res.clearCookie("sid");
+              res.json({
+                msg: "User deleted successfully"
+              })
             })
+
   
           })
         })

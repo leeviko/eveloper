@@ -8,7 +8,9 @@ import {
   LOADING,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  DELETE_FAIL,
+  DELETE_USER
 } from "../actions/types";
 
 // Check if authenticated
@@ -83,10 +85,27 @@ export const register = ({ email, name, password }) => dispatch => {
     })
 }
 
+// Delete user
+export const deleteUser = () => dispatch => {
+  
+  axios.delete("/api/users")
+    .then(res => {
+      dispatch({
+        type: DELETE_USER
+      })
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status, "DELETE_FAIL"));
+      dispatch({
+        type: DELETE_FAIL
+      });
+    })
+}
+
 // Logout
 export const logout = () => dispatch => {
   
-  axios.delete("/api/users/logout", { withCredentials: true })
+  axios.delete("/api/users/logout")
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS
